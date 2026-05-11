@@ -1,3 +1,22 @@
+/**
+ * GetUsuarioByIdSection Component
+ * 
+ * Search for a specific user by ID and display their details in a table.
+ * Requires user input (ID) before fetching.
+ * Shows error if user not found.
+ * 
+ * State:
+ * - userId: The ID entered by the user
+ * - usuario: Single user object returned from search
+ * - loading: Boolean tracking search status
+ * - error: Error message if search fails or user not found
+ * 
+ * Functions:
+ * - handleSearch: Fetches user data by ID and handles responses
+ * 
+ * Note: The API response returns dados as an array, we extract [0]
+ */
+
 import React, { useState } from 'react';
 import { getUsuarioById } from '../../services/apiService';
 

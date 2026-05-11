@@ -1,3 +1,27 @@
+/**
+ * DeleteLogicoSection Component
+ * 
+ * Performs a LOGICAL DELETE (soft delete) on a user.
+ * Sets the user's Estado to false (marks as inactive).
+ * User data remains in the database and can be reactivated.
+ * 
+ * State:
+ * - userId: The ID of the user to deactivate
+ * - loading: Boolean tracking deletion status
+ * - result: Response from the API
+ * 
+ * Functions:
+ * - handleDelete: Confirms action and sends soft delete request
+ * 
+ * Safety Features:
+ * - Confirmation dialog before proceeding
+ * - User can undo by using ReactivateUserSection
+ * 
+ * Contrast with DeleteFisicoSection:
+ * - Logico: Reversible, data preserved, Estado = false
+ * - Fisico: Permanent, data deleted from database
+ */
+
 import React, { useState } from 'react';
 import { deleteLogico } from '../../services/apiService';
 

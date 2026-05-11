@@ -1,3 +1,19 @@
+/**
+ * GetUsuariosSection Component
+ * 
+ * Displays all users from the database in a table format.
+ * Automatically fetches data when component mounts.
+ * Provides a refresh button to reload user data.
+ * 
+ * State:
+ * - usuarios: Array of all users fetched from the database
+ * - loading: Boolean indicating if data is being fetched
+ * - error: Error message if fetch fails
+ * 
+ * Lifecycle:
+ * - useEffect on mount: Automatically fetches all users
+ */
+
 import React, { useState, useEffect } from 'react';
 import { getUsuarios } from '../../services/apiService';
 

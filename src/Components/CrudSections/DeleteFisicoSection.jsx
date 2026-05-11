@@ -1,3 +1,28 @@
+/**
+ * DeleteFisicoSection Component
+ * 
+ * Performs a PHYSICAL DELETE (hard delete) on a user.
+ * Permanently removes the user from the database.
+ * This action CANNOT be undone - use with caution!
+ * 
+ * State:
+ * - userId: The ID of the user to permanently delete
+ * - loading: Boolean tracking deletion status
+ * - result: Response from the API
+ * 
+ * Functions:
+ * - handleDelete: Confirms action (twice!) and sends permanent delete request
+ * 
+ * Safety Features:
+ * - Double confirmation dialog with explicit warning
+ * - "danger" button styling to visually indicate permanent action
+ * - This prevents accidental data loss
+ * 
+ * Contrast with DeleteLogicoSection:
+ * - Fisico: Permanent, data deleted, cannot be recovered
+ * - Logico: Reversible, data preserved, can be reactivated
+ */
+
 import React, { useState } from 'react';
 import { deleteFisico } from '../../services/apiService';
 
