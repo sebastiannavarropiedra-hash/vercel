@@ -1,4 +1,4 @@
-import yoimage from '../Assets/YO.jpg'
+import yoimage from '../assets/YO.jpg'
 
 const INFO = {
 	main: {
