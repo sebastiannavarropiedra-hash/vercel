@@ -1,0 +1,116 @@
+.ContactContent {
+    min-height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 4rem 2rem;
+
+    color: white;
+}
+
+/* TITLE */
+.ContactContent h1 {
+    font-size: 4rem;
+    color: white;
+    font-weight: 700;
+
+    margin-bottom: 1.5rem;
+
+    letter-spacing: -2px;
+}
+
+/* DESCRIPTION */
+.ContactContent p {
+    max-width: 700px;
+
+    font-size: 1.1rem;
+
+    line-height: 1.8;
+
+    color: #b8b8b8;
+
+    margin-bottom: 3rem;
+}
+
+/* EMAIL LINK */
+.ContactContent p a {
+    color: #ff7a1a;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.3s ease;
+}
+
+.ContactContent p a:hover {
+    color: white;
+}
+
+/* SOCIAL LIST */
+.ContactContent ul {
+    display: flex;
+
+    gap: 1.5rem;
+
+    list-style: none;
+
+    padding: 0;
+}
+
+/* SOCIAL BUTTONS */
+.ContactContent ul li a {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 170px;
+    height: 55px;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.03);
+
+    backdrop-filter: blur(10px);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+    transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.ContactContent ul li a:hover {
+    transform: translateY(-5px);
+
+    border-color: #ff7a1a;
+
+    box-shadow:
+        0 10px 30px rgba(255, 122, 26, 0.2);
+
+    color: #ff7a1a;
+}
+
+.ContactContent {
+    background:
+        radial-gradient(circle at top left,
+            rgba(255, 122, 26, 0.12),
+            transparent 30%),
+
+        radial-gradient(circle at bottom right,
+            rgba(0, 255, 255, 0.08),
+            transparent 30%);
+
+    background-color: #0f0f0f;
+}

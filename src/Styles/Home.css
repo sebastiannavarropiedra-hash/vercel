@@ -1,0 +1,11 @@
+.HomeContainer {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+}
+
+.HomeContent {
+    flex: 1;
+}
