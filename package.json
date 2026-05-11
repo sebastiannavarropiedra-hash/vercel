@@ -27,9 +27,7 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router-dom": "^7.15.0",
-    "slim": "^0.11.1",
-    "tsparticles": "^3.9.1",
-    "tsparticles-slim": "^2.12.0"
+    "slim": "^0.11.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
