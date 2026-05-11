@@ -41,8 +41,8 @@ function GetUsuariosSection() {
 
   return (
     <section className="crud-section">
-      <h2 className="section-title">GET /usuarios</h2>
-      <p className="route-description">Retrieve all users</p>
+      <h2 className="section-title">-GET /usuarios-</h2>
+      <p className="route-description">Retrieve all active users</p>
       <button onClick={fetchData} disabled={loading} className="crud-btn">
         {loading ? "Loading..." : "Refresh Users"}
       </button>
@@ -54,9 +54,9 @@ function GetUsuariosSection() {
           <table className="users-table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>ID usuario</th>
                 <th>Nombre</th>
-                <th>Perfil</th>
+                <th>ID Perfil</th>
                 <th>Credencial</th>
                 <th>Estado</th>
               </tr>

@@ -35,7 +35,7 @@ function DeleteFisicoSection() {
     e.preventDefault();
     if (!userId) return;
 
-    if (!window.confirm('WARNING: This will permanently delete the user from the database. Are you absolutely sure?')) {
+    if (!window.confirm('WARNING: This will permanently delete the user from the database. you could lose your job')) {
       return;
     }
 
@@ -53,12 +53,12 @@ function DeleteFisicoSection() {
 
   return (
     <section className="crud-section">
-      <h2 className="section-title">DELETE /usuarios/fisico/:id</h2>
+      <h2 className="section-title">-DELETE /usuarios/fisico/:id-</h2>
       <p className="route-description">Perform a physical delete (permanent removal)</p>
       <form onSubmit={handleDelete} className="crud-form">
         <input
           type="number"
-          placeholder="Enter User ID to permanently delete"
+          placeholder="Enter User ID to permanently delete forever and ever"
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
           required

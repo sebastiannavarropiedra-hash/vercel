@@ -46,7 +46,7 @@ function ReactivateUserSection() {
 
   return (
     <section className="crud-section">
-      <h2 className="section-title">PUT /usuarios/reactivar/:id</h2>
+      <h2 className="section-title">-PUT /usuarios/reactivar/:id-</h2>
       <p className="route-description">Reactivate an inactive user</p>
       <form onSubmit={handleReactivate} className="crud-form">
         <input

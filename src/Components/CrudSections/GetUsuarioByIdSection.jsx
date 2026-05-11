@@ -49,7 +49,7 @@ function GetUsuarioByIdSection() {
 
   return (
     <section className="crud-section">
-      <h2 className="section-title">GET /usuarios/:id</h2>
+      <h2 className="section-title">-GET /usuarios/:id-</h2>
       <p className="route-description">Retrieve a single user by ID</p>
       <form onSubmit={handleSearch} className="crud-form">
         <input
@@ -71,9 +71,10 @@ function GetUsuarioByIdSection() {
           <table className="users-table">
             <thead>
               <tr>
-                <th>ID</th>
+               <th>ID usuario</th>
                 <th>Nombre</th>
-                <th>Perfil</th>
+                <th>ID Perfil</th>
+                <th>Credencial</th>
                 <th>Estado</th>
               </tr>
             </thead>
@@ -82,6 +83,7 @@ function GetUsuarioByIdSection() {
                 <td>{usuario.ID_Usuario}</td>
                 <td>{usuario.Nombre_Usuario}</td>
                 <td>{usuario.ID_Perfil}</td>
+                <td>{usuario.Credencial_Espacial}</td>
                 <td>{usuario.Estado ? "Activo" : "Inactivo"}</td>
               </tr>
             </tbody>

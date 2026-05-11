@@ -34,7 +34,7 @@ function DeleteLogicoSection() {
     e.preventDefault();
     if (!userId) return;
 
-    if (!window.confirm('Are you sure you want to mark this user as inactive?')) return;
+    if (!window.confirm('Are you sure you want to mark this user as inactive(Wont appear on active users list)?')) return;
 
     setLoading(true);
     try {
@@ -50,12 +50,12 @@ function DeleteLogicoSection() {
 
   return (
     <section className="crud-section">
-      <h2 className="section-title">DELETE /usuarios/logico/:id</h2>
+      <h2 className="section-title">-DELETE /usuarios/logico/:id-</h2>
       <p className="route-description">Perform a logical delete (mark as inactive)</p>
       <form onSubmit={handleDelete} className="crud-form">
         <input
           type="number"
-          placeholder="Enter User ID to deactivate"
+          placeholder="Enter User ID to deactivate(Partially delete)"
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
           required

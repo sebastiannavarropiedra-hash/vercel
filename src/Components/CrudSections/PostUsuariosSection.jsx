@@ -56,8 +56,8 @@ function PostUsuariosSection() {
 
   return (
     <section className="crud-section">
-      <h2 className="section-title">POST /usuarios</h2>
-      <p className="route-description">Create a new user</p>
+      <h2 className="section-title">-POST /usuarios-</h2>
+      <p className="route-description">Create a new user(users will be generated an user ID automatically)</p>
       <form onSubmit={handleSubmit} className="crud-form">
         <input
           type="text"
@@ -70,7 +70,7 @@ function PostUsuariosSection() {
         <input
           type="text"
           name="Credencial_Espacial"
-          placeholder="Credencial Espacial"
+          placeholder="Credencial Espacial(Job title)"
           value={formData.Credencial_Espacial}
           onChange={handleChange}
           required
@@ -78,7 +78,7 @@ function PostUsuariosSection() {
         <input
           type="number"
           name="ID_Perfil"
-          placeholder="ID Perfil"
+          placeholder="ID Perfil(1 to 3)"
           value={formData.ID_Perfil}
           onChange={handleChange}
           required

@@ -33,7 +33,7 @@ function TestSection() {
 
   return (
     <section className="crud-section">
-      <h2 className="section-title">GET /test</h2>
+      <h2 className="section-title">-GET /test-</h2>
       <p className="route-description">Test endpoint to verify API connection</p>
       <button onClick={handleTest} disabled={loading} className="crud-btn">
         {loading ? "Testing..." : "Test Connection"}
