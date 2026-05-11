@@ -115,11 +115,19 @@
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin: 0.5em;
 }
 
 .crud-btn:hover:not(:disabled) {
-    background: #0284c7;
-    transform: translateY(-2px);
+   transform: translateY(-5px);
+
+    border-color: #ff7a1a;
+
+    box-shadow:
+        0 10px 30px rgba(255, 122, 26, 0.2);
+
+    color: #ff7a1a;
+    background: #1a1a1a;
 }
 
 .crud-btn:disabled {
@@ -133,7 +141,15 @@
 }
 
 .crud-btn.delete-btn:hover:not(:disabled) {
-    background: #b91c1c;
+      transform: translateY(-5px);
+
+    border-color: #ff7a1a;
+
+    box-shadow:
+        0 10px 30px rgba(255, 122, 26, 0.2);
+
+    color: #ff7a1a;
+    background: #1a1a1a;
 }
 
 .crud-btn.delete-btn.danger {
@@ -141,7 +157,15 @@
 }
 
 .crud-btn.delete-btn.danger:hover:not(:disabled) {
-    background: #7f1d1d;
+      transform: translateY(-5px);
+
+    border-color: #ff7a1a;
+
+    box-shadow:
+        0 10px 30px rgba(255, 122, 26, 0.2);
+
+    color: #ff7a1a;
+    background: #1a1a1a;
 }
 
 .crud-btn.reactivate-btn {
@@ -149,8 +173,15 @@
 }
 
 .crud-btn.reactivate-btn:hover:not(:disabled) {
-    background: #059669;
-}
+  transform: translateY(-5px);
+
+    border-color: #ff7a1a;
+
+    box-shadow:
+        0 10px 30px rgba(255, 122, 26, 0.2);
+
+    color: #ff7a1a;
+    background: #1a1a1a;}
 
 /* Result Box */
 .result-box {
