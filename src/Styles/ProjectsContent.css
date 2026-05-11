@@ -144,6 +144,14 @@
     background: #7f1d1d;
 }
 
+.crud-btn.reactivate-btn {
+    background: #10b981;
+}
+
+.crud-btn.reactivate-btn:hover:not(:disabled) {
+    background: #059669;
+}
+
 /* Result Box */
 .result-box {
     background: #0a0a0a;

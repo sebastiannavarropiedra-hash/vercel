@@ -7,6 +7,7 @@ import GetUsuarioByIdSection from './CrudSections/GetUsuarioByIdSection';
 import PutUpdateSection from './CrudSections/PutUpdateSection';
 import DeleteLogicoSection from './CrudSections/DeleteLogicoSection';
 import DeleteFisicoSection from './CrudSections/DeleteFisicoSection';
+import ReactivateUserSection from './CrudSections/ReactivateUserSection';
 
 function ProjectsContent() {
     return (
@@ -19,6 +20,7 @@ function ProjectsContent() {
                 <PostUsuariosSection />
                 <GetUsuarioByIdSection />
                 <PutUpdateSection />
+                <ReactivateUserSection />
                 <DeleteLogicoSection />
                 <DeleteFisicoSection />
             </div>
