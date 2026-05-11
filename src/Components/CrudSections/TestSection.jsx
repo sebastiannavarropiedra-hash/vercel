@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { testApi } from '../../services/apiService';
 
 function TestSection() {
   const [testResult, setTestResult] = useState(null);
@@ -7,8 +8,7 @@ function TestSection() {
   const handleTest = async () => {
     setLoading(true);
     try {
-      const result = await fetch("https://backendportfolio-8r5l.onrender.com/api/test");
-      const data = await result.json();
+      const data = await testApi();
       setTestResult(data);
     } catch (error) {
       console.error(error);

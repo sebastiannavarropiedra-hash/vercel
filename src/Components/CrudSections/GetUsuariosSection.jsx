@@ -41,6 +41,7 @@ function GetUsuariosSection() {
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Perfil</th>
+                <th>Credencial</th>
                 <th>Estado</th>
               </tr>
             </thead>
@@ -50,6 +51,7 @@ function GetUsuariosSection() {
                   <td>{usuario.ID_Usuario}</td>
                   <td>{usuario.Nombre_Usuario}</td>
                   <td>{usuario.ID_Perfil}</td>
+                  <td>{usuario.Credencial_Espacial}</td>
                   <td>{usuario.Estado ? "Activo" : "Inactivo"}</td>
                 </tr>
               ))}

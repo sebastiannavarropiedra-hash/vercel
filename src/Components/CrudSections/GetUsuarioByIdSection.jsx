@@ -15,7 +15,11 @@ function GetUsuarioByIdSection() {
     setError(null);
     try {
       const data = await getUsuarioById(userId);
-      setUsuario(data.datos || data);
+      const usuarioEncontrado = Array.isArray(data.datos) ? data.datos[0] : data.datos || data;
+      setUsuario(usuarioEncontrado || null);
+      if (!usuarioEncontrado) {
+        setError('Usuario no encontrado');
+      }
     } catch (err) {
       console.error(err);
       setError("Failed to fetch user");
