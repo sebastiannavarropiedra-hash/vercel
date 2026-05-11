@@ -7,6 +7,15 @@ import ProjectsContent from '../Components/ProjectsContent';
 // Projects page component
 // This page renders the site navigation, the project list, and the footer.
 // The Navbar receives an "active" prop so it can highlight the current page.
+
+{/*}Projects.jsx
+ ├── Navbar
+ ├── ProjectsContent
+ │     ├── UsersTable
+ │     ├── CreateUserForm
+ │     ├── Stats
+ │     └── API Cards
+ └── Footer*/}
 function Projects() {
     return (
         <>
