@@ -4,6 +4,9 @@ import Footer from '../Components/Footer';
 import HomeContent from '../Components/HomeContent';
 import '../Styles/Home.css';
 function Home() {
+
+  
+
     return (
 
         <>

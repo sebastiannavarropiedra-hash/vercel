@@ -4,6 +4,8 @@ import "../Styles/HomeContent.css";
 import ParticlesBackground from "./ParticlesBackground";
 
 function HomeContent() {
+
+    
     return (
         <>
 

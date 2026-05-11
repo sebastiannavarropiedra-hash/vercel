@@ -16,7 +16,7 @@
 
 .nav-background {
     width: 25rem;
-    height: 2rem;
+    height: auto;
     padding-left: 0%;
     padding-right: 0%;
     background: #fff;
@@ -41,17 +41,21 @@
 
 .nav-item.active a {
     color: #14b8a6;
+    text-shadow: rgb(14, 90, 65);
 }
 
 .nav-item a {
     text-decoration: none;
-    color: var(--primary-color);
 }
 
 .nav-item a:hover {
     color: var(--link-color);
     transition: color 0.3s ease-in-out;
 }
+.theme-toggle {
+padding: 0%;
+}
+
 
 @media (max-width: 600px) {
     .navbar {

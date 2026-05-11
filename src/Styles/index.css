@@ -10,11 +10,16 @@
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
-
+  --title-color: #000000;
+  /* color en modo claro */
+  --subtitle-color: #000000;
+  /* mismo color en claro */
+  --education-h3-color: #000000;
+  --experience-left-h3-color: #000000;
+  --bs-link-color-rgb: #000000;
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
@@ -25,10 +30,71 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  
+
   @media (max-width: 1024px) {
     font-size: 16px;
   }
 }
+
+#body {
+  font-family: 'Roboto', sans-serif;
+  background-color: transparent;
+}
+
+.title, .AboutmeTitle,.AboutmeDescription {
+  color: var(--title-color);
+}
+
+.subtitle {
+  color: var(--subtitle-color);
+}
+
+.experience-left h3 {
+  color: var(--experience-left-h3-color);
+
+}
+
+.education-item h3 {
+  color: var(--education-h3-color);
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+.ContactContent h1 {
+  color: var(--title-color);
+}
+
+
+
+
+
+.dark-mode {
+  --text: #ffffff;
+  --text-h: #f3f4f6;
+  --bg: #080808;
+  --code-bg: #1f2028;
+  --accent: #c084fc;
+  --accent-bg: rgba(192, 132, 252, 0.15);
+  --accent-border: rgba(192, 132, 252, 0.5);
+  --social-bg: rgba(47, 48, 58, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  --experience-left-h3-color: #ffffff;
+  --education-h3-color: #ffffff;
+
+ 
+
+  --title-color: #ffffff;
+  /* título blanco en dark mode */
+  --subtitle-color: #ffffff;
+  /* subtítulo blanco en dark mode */
+  --bs-link-color-rgb: #ffffff;
+}
+
+
+
+
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -77,20 +143,24 @@ h1 {
   font-size: 56px;
   letter-spacing: -1.68px;
   margin: 32px 0;
+
   @media (max-width: 1024px) {
     font-size: 36px;
     margin: 20px 0;
   }
 }
+
 h2 {
   font-size: 24px;
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 8px;
+
   @media (max-width: 1024px) {
     font-size: 20px;
   }
 }
+
 p {
   margin: 0;
 }
