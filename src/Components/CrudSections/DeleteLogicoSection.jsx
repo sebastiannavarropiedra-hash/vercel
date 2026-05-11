@@ -53,3 +53,5 @@ function DeleteLogicoSection() {
 }
 
 export default DeleteLogicoSection;
+
+
