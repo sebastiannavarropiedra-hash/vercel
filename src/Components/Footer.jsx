@@ -29,7 +29,7 @@ function Footer() {
           <hr className="linea-footer" />
 
           {/* Copyright */}
-          <p>Todos los derechos reservados 2026</p>
+          <p>© 2026 Todos los derechos reservados</p>
 
         </div>
       </footer>

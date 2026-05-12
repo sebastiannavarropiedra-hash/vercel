@@ -6,14 +6,16 @@ import '../Styles/Home.css';
 import ParticlesBackground from '../Components/ParticlesBackground';
 function Home() {
 
-  
+
 
     return (
 
         <>
             <div className='HomeContainer'>
-                <Navbar active="Home" />
 
+                <ParticlesBackground />
+                <Navbar active="Home" />
+                
                 <div className="HomeContent">
                     <HomeContent />
                 </div>
@@ -22,7 +24,7 @@ function Home() {
 
             </div>
         </>
-            );
+    );
 }
 
-            export default Home;
+export default Home;

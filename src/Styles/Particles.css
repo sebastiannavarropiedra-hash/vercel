@@ -1,53 +1,57 @@
 .particlesContainer {
-  width: 100%;
-  height: 100vh; /* full screen background */
-  display: flex;
-  overflow: hidden;
-  position: absolute; /* sits behind content */
-  top: 0;
-  left: 0;
-  z-index: -1; /* ensures it's behind everything */
-  flex-direction: column;
-  justify-content: center;
-  padding: 3vh 0 4vh 0;
+    width: 100%;
+    height: 100vh;
+    /* full screen background */
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    /* sits behind content */
+    top: 0;
+    left: 0;
+    z-index: -1;
+    /* ensures it's behind everything */
+    flex-direction: column;
+    justify-content: center;
+    padding: 3vh 0 4vh 0;
 }
 
 .bubbles {
-  justify-content: space-evenly;
-  display: flex;
-  position: relative;
-  flex-wrap: wrap;
+    justify-content: space-evenly;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
 }
 
 .bubbles span {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  background: #83bbff61;
-  margin: 0 4px;
-  border-radius: 50%;
-  box-shadow: 0 0 0 10px #83bbff26, 0 0 50px #83bbff61, 0 0 100px #83bbff61;
-  animation: animate 15s linear infinite;
-  animation-duration: calc(10s / var(--i));
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background: #83bbff61;
+    margin: 0 4px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #83bbff26, 0 0 50px #83bbff61, 0 0 100px #83bbff61;
+    animation: animate 15s linear infinite;
+    animation-duration: calc(var(--i) * 3s);
 }
 
 .bubbles span:nth-child(even) {
-  background: #ffffff4f;
-  box-shadow: 0 0 0 10px #ffffff14, 0 0 50px #ffffff4f, 0 0 100px #ffffff4f;
+    background: #ffffff4f;
+    box-shadow: 0 0 0 10px #ffffff14, 0 0 50px #ffffff4f, 0 0 100px #ffffff4f;
 }
 
 @keyframes animate {
-  0% {
-    transform: translateY(100vh) scale(0);
-  }
-  100% {
-    transform: translateY(-20vh) scale(1);
-  }
+    0% {
+        transform: translateY(100vh) scale(0);
+    }
+
+    100% {
+        transform: translateY(-20vh) scale(1);
+    }
 }
 
 @media (max-width: 767px) {
-  .bubbles span {
-    width: 15px;
-    height: 15px;
-  }
+    .bubbles span {
+        width: 15px;
+        height: 15px;
+    }
 }
