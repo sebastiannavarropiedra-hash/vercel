@@ -98,7 +98,8 @@ function App() {
 
 
 
-
+<div className='App'>
+  
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Aboutme" element={<Aboutme />} />
@@ -106,7 +107,8 @@ function App() {
           <Route path="/Contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-
+        
+</div>
 
 
       </BrowserRouter>

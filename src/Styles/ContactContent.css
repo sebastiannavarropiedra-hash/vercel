@@ -1,5 +1,4 @@
 .ContactContent {
-    min-height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -75,30 +74,49 @@
 }
 
 .ContactContent ul li a::before {
-  content: "";
-  position: absolute;
-  inset: 0; /* ocupa todo el botón */
-  border-radius: 16px; /* mismo radio que el botón */
-  padding: 2px; /* grosor del borde */
-  background: conic-gradient(from var(--angle), red, yellow, lime, aqua, blue, magenta, red);
-  --angle: 0deg;
-  animation: rotate 10s linear infinite;
-  border-image-slice: 1;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* ocupa todo el botón */
+    border-radius: 16px;
+    /* mismo radio que el botón */
+    padding: 2px;
+    /* grosor del borde */
+    background: conic-gradient(from var(--angle), red, yellow, lime, aqua, blue, magenta, red);
+    --angle: 0deg;
+    animation: rotate 10s linear infinite;
+    border-image-slice: 1;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
 }
 
 @keyframes rotate {
-  to {
-    --angle: 360deg;
-  }
+    to {
+        --angle: 360deg;
+    }
 }
 
 @property --angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@media (max-width: 600px) {
+    .ContactContent {
+        padding: 0.5rem;
+    }
+
+
+
+
+
+    .ContactContent ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }

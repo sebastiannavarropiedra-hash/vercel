@@ -34,8 +34,8 @@ const INFO = {
 	experience: [
 		{
 			Job:"Job1",
-			title: "-Customer Service Specialist & SME",
-			company: "MOVATE",
+			title: "Customer Service Specialist & SME",
+			company: "-MOVATE",
 			duration: "August 2024 – Present",
 
 			skills:
@@ -47,8 +47,8 @@ const INFO = {
 
 		{
 			Job:"Job2",
-			title: "-Technical Support & Quality Coach",
-			company: "CONCENTRIX CR",
+			title: "Technical Support & Quality Coach",
+			company: "-CONCENTRIX CR",
 			duration: "May 2023 – August 2024",
 
 			skills:
@@ -60,8 +60,8 @@ const INFO = {
 
 		{
 			Job:"Job3",
-			title: "-Production Team Lead",
-			company: "PIZZA HUT",
+			title: "Production Team Lead",
+			company: "-PIZZA HUT",
 			duration: "2022 – 2023",
 
 			skills:

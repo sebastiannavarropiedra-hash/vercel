@@ -3,6 +3,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import HomeContent from '../Components/HomeContent';
 import '../Styles/Home.css';
+import ParticlesBackground from '../Components/ParticlesBackground';
 function Home() {
 
   
@@ -11,7 +12,6 @@ function Home() {
 
         <>
             <div className='HomeContainer'>
-
                 <Navbar active="Home" />
 
                 <div className="HomeContent">

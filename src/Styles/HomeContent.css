@@ -1,55 +1,57 @@
 .homepage-container {
 
-    padding: 2rem;
+  padding: 2rem;
 }
 
 .homepage-first-area {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
 .homepage-first-area-left-side {
-    flex: 1;
-    margin: 1rem;
-    padding:1rem;
+  flex: 1;
+  margin: 1rem;
+  padding: 1rem;
 }
 
 .homepage-first-area-right-side {
-    flex: 1;
-    margin: 1rem;
-    padding:1rem;
+  flex: 1;
+  margin: 1rem;
+  padding: 1rem;
 }
 
 .homepage-title {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
-.homepage-description {
-    font-size: 1.2rem;
-    line-height: 1.5;
+.homepage-subtitle {
+  font-size: 1.25rem;
+  text-align: justify;
 }
 
 .homepage-image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 
 
 /* 1. El marco circular */
 .homepage-image-wrapper {
-    position: relative;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    overflow: hidden; /* Esto recorta las partículas */
-    background-color: #000; /* Color de fondo por si las partículas son claras */
-    isolation: isolate; 
+  position: relative;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  overflow: hidden;
+  /* Esto recorta las partículas */
+  background-color: #000;
+  /* Color de fondo por si las partículas son claras */
+  isolation: isolate;
 }
 
 
@@ -58,43 +60,43 @@
 
 
 @media (max-width: 1024px) {
-    .homepage-first-area {
-        flex-direction: column;
-    }
+  .homepage-first-area {
+    flex-direction: column;
+  }
 
-    .homepage-first-area-left-side {
-        display: flex;
-        flex-direction: column;
-        /* Changed: set direction to column */
-        align-items: flex-start;
-        width: 100%;
-        order: 2;
-    }
+  .homepage-first-area-left-side {
+    display: flex;
+    flex-direction: column;
+    /* Changed: set direction to column */
+    align-items: flex-start;
+    width: 100%;
+    order: 2;
+  }
 
-    .homepage-title {
-        width: 100% !important;
-        margin-top: 20px;
-        order: 2;
-    }
+  .homepage-title {
+    width: 100% !important;
+    margin-top: 20px;
+    order: 2;
+  }
 
-    .homepage-subtitle {
-        width: 100% !important;
-        margin-top: 10px;
-        order: 3;
-    }
+  .homepage-subtitle {
+    width: 100% !important;
+    margin-top: 10px;
+    order: 3;
+  }
 
-    .homepage-first-area-right-side {
-        width: 100%;
-        order: 1;
-    }
+  .homepage-first-area-right-side {
+    width: 100%;
+    order: 1;
+  }
 
-   
-    .homepage-image-container {
-        padding-top: 50px;
-        padding-bottom: 50px;
-        margin-left: 10px;
-        order: 1;
-    }
+
+  .homepage-image-container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-left: 10px;
+    order: 1;
+  }
 }
 
 
@@ -107,7 +109,7 @@
   left: 50%;
   border-radius: 50%;
   -webkit-animation: glow 9s linear 8s infinite alternate;
-  
+
 }
 
 .particles {
@@ -116,7 +118,7 @@
   left: calc(50% - 50px);
   width: 100px;
   height: 100px;
-  
+
 }
 
 .rotate {
@@ -164,7 +166,7 @@
   -webkit-animation: rotate 20s linear 0s infinite alternate;
 }
 
-.pulse{
+.pulse {
   -webkit-animation: pulse 8s linear 0s infinite alternate;
 }
 
@@ -174,8 +176,9 @@
     transform: rotate(0deg);
     box-shadow: 0 0 60px 20px #56bcf9, 25px 15px 50px 10px #fff, -5px -25px 30px 5px #fff;
   }
+
   100% {
-        transform: rotate(5deg);
+    transform: rotate(5deg);
     box-shadow: 0 0 90px 20px #56bcf9, 35px 20px 40px 10px #fff, -30px -30px 40px 5px #fff;
   }
 }
@@ -184,6 +187,7 @@
   0% {
     -webkit-transform: rotate(0deg);
   }
+
   100% {
     -webkit-transform: rotate(360deg);
   }
@@ -193,6 +197,7 @@
   0% {
     -webkit-transform: rotate(0deg);
   }
+
   100% {
     -webkit-transform: rotate(360deg);
   }
@@ -202,6 +207,7 @@
   0% {
     -webkit-transform: scale(.2);
   }
+
   100% {
     -webkit-transform: scale(.8);
   }
@@ -209,14 +215,16 @@
 
 @-webkit-keyframes position {
   0% {
-    -webkit-transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0, 0, 0);
     opacity: 1;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
-    -webkit-transform: translate3d(100px,100px,0);
+    -webkit-transform: translate3d(100px, 100px, 0);
     opacity: 0;
   }
 }
@@ -225,6 +233,7 @@
   0% {
     -webkit-transform: scale(1);
   }
+
   100% {
     -webkit-transform: scale(.5);
   }
@@ -234,18 +243,23 @@
   0% {
     box-shadow: inset 0 0 20px 20px #0079e8, 0 0 50px 10px #0079e8, inset 0 0 80px 80px #269aff;
   }
+
   33.33% {
     box-shadow: inset 0 0 20px 20px #0079e8, 0 0 130px 10px #0079e8, inset 0 0 50px 50px #269aff;
   }
+
   33.34% {
     box-shadow: inset 0 0 20px 20px #2693ff, 0 0 50px 10px #2693ff, inset 0 0 80px 80px #52abff;
   }
+
   66.66% {
     box-shadow: inset 0 0 20px 20px #2693ff, 0 0 130px 10px #2693ff, inset 0 0 50px 50px #52abff;
   }
+
   66.67% {
     box-shadow: inset 0 0 20px 20px #556be7, 0 0 50px 10px #485fe8, inset 0 0 80px 80px #7d71e8;
   }
+
   100% {
     box-shadow: inset 0 0 20px 20px #485fe8, 0 0 130px 10px #485fe8, inset 0 0 50px 50px #7d71e8;
   }
@@ -253,61 +267,70 @@
 
 
 
-.rotate .angle:nth-child(1){
+.rotate .angle:nth-child(1) {
   /* change the angle every 2 seconds */
   -webkit-animation: angle 10s steps(5) 0s infinite;
 }
-.rotate .angle:nth-child(1) .size{
+
+.rotate .angle:nth-child(1) .size {
   /* change the size of the particle every 2 seconds */
   -webkit-animation: size 10s steps(5) 0s infinite;
 }
-.rotate .angle:nth-child(1) .particle{
+
+.rotate .angle:nth-child(1) .particle {
   /* animate the glow and change the color every 2 seconds */
   -webkit-animation: particle 6s linear infinite alternate;
 }
-.rotate .angle:nth-child(1) .position{
+
+.rotate .angle:nth-child(1) .position {
   /* animate the fly out of the particle and its fade out at the end */
   -webkit-animation: position 2s linear 0s infinite;
 }
 
 
 
-.rotate .angle:nth-child(2){
+.rotate .angle:nth-child(2) {
   /* change the angle every 2 seconds */
   -webkit-animation: angle 4.95s steps(3) -1.65s infinite alternate;
 }
-.rotate .angle:nth-child(2) .size{
+
+.rotate .angle:nth-child(2) .size {
   /* change the size of the particle every 2 seconds */
   -webkit-animation: size 4.95s steps(3) -1.65s infinite alternate;
 }
-.rotate .angle:nth-child(2) .particle{
+
+.rotate .angle:nth-child(2) .particle {
   /* animate the glow and change the color every 2 seconds */
   -webkit-animation: particle 4.95s linear -3.3s infinite alternate;
 }
-.rotate .angle:nth-child(2) .position{
+
+.rotate .angle:nth-child(2) .position {
   /* animate the fly out of the particle and its fade out at the end */
   -webkit-animation: position 1.65s linear -1.65s infinite;
 }
 
 
-.rotate .angle:nth-child(3){
+.rotate .angle:nth-child(3) {
   /* change the angle every 2 seconds */
   -webkit-animation: angle 13.76s steps(8) -6.88s infinite;
 }
-.rotate .angle:nth-child(3) .size{
+
+.rotate .angle:nth-child(3) .size {
   /* change the size of the particle every 2 seconds */
   -webkit-animation: size 6.88s steps(4) -5.16s infinite alternate;
 }
-.rotate .angle:nth-child(3) .particle{
+
+.rotate .angle:nth-child(3) .particle {
   /* animate the glow and change the color every 2 seconds */
   -webkit-animation: particle 5.16s linear -1.72 infinite alternate;
 }
-.rotate .angle:nth-child(3) .position{
+
+.rotate .angle:nth-child(3) .position {
   /* animate the fly out of the particle and its fade out at the end */
   -webkit-animation: position 1.72s linear 0s infinite;
 }
 
-.rotate .angle:nth-child(5) .position{
+.rotate .angle:nth-child(5) .position {
   /* animate the fly out of the particle and its fade out at the end */
   -webkit-animation: position 2.45s linear 1s infinite;
 }

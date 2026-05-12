@@ -30,7 +30,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  
+
 
   @media (max-width: 1024px) {
     font-size: 16px;
@@ -42,7 +42,9 @@
   background-color: transparent;
 }
 
-.title, .AboutmeTitle,.AboutmeDescription {
+.title,
+.AboutmeTitle,
+.AboutmeDescription {
   color: var(--title-color);
 }
 
@@ -60,6 +62,7 @@
   font-weight: 600;
   margin: 0.5rem 0;
 }
+
 .ContactContent h1 {
   color: var(--title-color);
 }
@@ -82,19 +85,12 @@
   --experience-left-h3-color: #ffffff;
   --education-h3-color: #ffffff;
 
- 
-
   --title-color: #ffffff;
   /* título blanco en dark mode */
   --subtitle-color: #ffffff;
   /* subtítulo blanco en dark mode */
   --bs-link-color-rgb: #ffffff;
 }
-
-
-
-
-
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -116,9 +112,7 @@
   }
 }
 
-body {
-  margin: 0;
-}
+
 
 #root {
   width: 1126px;
@@ -179,3 +173,4 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+

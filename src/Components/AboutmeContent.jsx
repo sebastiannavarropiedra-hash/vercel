@@ -5,7 +5,7 @@ function AboutmeContent() {
     return (
         <>
             <div className="AboutmeContentContainerone row">
-                <div className="Aboutmefirstarea col-md-6">
+                <div className="Aboutmefirstarea col-md-5">
                     <div className="AboutmeTitle">
                         {INFO.about.title}
                     </div>
@@ -27,11 +27,11 @@ function AboutmeContent() {
             </div>
 
             <div className="AboutmeContentContainertwo row">
-                <div className="AboutmeThirdarea col-4">
+                <div className="AboutmeThirdarea col">
                     <div className="Aboutmeskillsleft">Experience</div>
                 </div>
 
-                <div className="AboutmeFourtharea col-7">
+                <div className="AboutmeFourtharea col">
                     <div className="Aboutmeskillsright">
                         <div className="experience-list">
                             <ul className="list-group list-group-numbered ">
@@ -105,11 +105,11 @@ function AboutmeContent() {
             </div>
 
             <div className="AboutmeContentContainerThree row">
-                <div className="AboutmeThirdarea col-4">
+                <div className="AboutmeThirdarea col">
                     <div className="Aboutmeskillsleft">Education</div>
                 </div>
 
-                <div className="AboutmeFourtharea col-7">
+                <div className="AboutmeFourtharea col">
                     <div className="Aboutmeskillsright education-list">
                         <ul className="list-group">
                             {INFO.education.map((item, index) => (
