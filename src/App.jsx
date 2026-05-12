@@ -5,8 +5,8 @@ import Projects from './Pages/Projects.jsx'
 import Contact from './Pages/Contact.jsx'
 import NotFound from './Pages/NotFound.jsx'
 
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import 'animate.css';
 
 {/*src/
 │

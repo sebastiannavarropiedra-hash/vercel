@@ -33,7 +33,7 @@ import ReactivateUserSection from './CrudSections/ReactivateUserSection';
 function ProjectsContent() {
     return (
         <div className="dashboard-container">
-            <h1 className="dashboard-title">Backend API Dashboard</h1>
+            <h1 className="dashboard-title">Backend API Dashboard-Project 1</h1>
             
             <div className="crud-sections-container">
                 <TestSection />

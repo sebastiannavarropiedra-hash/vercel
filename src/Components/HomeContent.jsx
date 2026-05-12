@@ -5,13 +5,13 @@ import ParticlesBackground from "./ParticlesBackground";
 
 function HomeContent() {
 
-    
+
     return (
         <>
 
             <div className="home-container">
                 <div className="homepage-first-area">
-                    <div className="homepage-first-area-left-side">
+                    <div className="homepage-first-area-left-side ">
                         <div className="title homepage-title">
                             {INFO.homepage.title}
                         </div>
@@ -24,7 +24,40 @@ function HomeContent() {
                     <div className="homepage-first-area-right-side">
                         <div className="homepage-image-container">
                             <div className="homepage-image-wrapper">
-                                {/*                                 <ParticlesBackground />*/}
+                                <div className="glow"></div>
+                                <div className="particles">
+                                    <div className="rotate">
+                                        <div className="angle">
+                                            <div className="size">
+                                                <div className="position">
+                                                    <div className="pulse">
+                                                        <div className="particle"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="angle">
+                                            <div className="size">
+                                                <div className="position">
+                                                    <div className="pulse">
+                                                        <div className="particle"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="angle">
+                                            <div className="size">
+                                                <div className="position">
+                                                    <div className="pulse">
+                                                        <div className="particle"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

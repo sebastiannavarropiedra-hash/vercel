@@ -25,8 +25,8 @@ function AboutmeContent() {
 
 
             </div>
- 
-             <div className="AboutmeContentContainertwo row">
+
+            <div className="AboutmeContentContainertwo row">
                 <div className="AboutmeThirdarea col-4">
                     <div className="Aboutmeskillsleft">Experience</div>
                 </div>
@@ -34,70 +34,70 @@ function AboutmeContent() {
                 <div className="AboutmeFourtharea col-7">
                     <div className="Aboutmeskillsright">
                         <div className="experience-list">
-                           <ul className="list-group list-group-numbered ">
-                            <li className="experience-item active">
+                            <ul className="list-group list-group-numbered ">
+                                <li className="experience-item active">
 
-                    <div className="experience-left">
+                                    <div className="experience-left">
 
-                        <h3>
-                            {INFO.experience[0].company}
-                            <span> {INFO.experience[0].title}</span>
-                        </h3>
+                                        <h3>
+                                            {INFO.experience[0].company}
+                                            <span> {INFO.experience[0].title}</span>
+                                        </h3>
 
-                        <p>
-                            {INFO.experience[0].description}
-                        </p>
+                                        <p>
+                                            {INFO.experience[0].description}
+                                        </p>
 
-                    </div>
+                                    </div>
 
-                    <div className="experience-date">
-                        {INFO.experience[0].duration}
-                    </div>
+                                    <div className="experience-date">
+                                        {INFO.experience[0].duration}
+                                    </div>
 
-                </li>
+                                </li>
 
-                <li className="experience-item">
+                                <li className="experience-item">
 
-                    <div className="experience-left">
+                                    <div className="experience-left">
 
-                        <h3>
-                            {INFO.experience[1].company}
-                            <span> {INFO.experience[1].title}</span>
-                        </h3>
+                                        <h3>
+                                            {INFO.experience[1].company}
+                                            <span> {INFO.experience[1].title}</span>
+                                        </h3>
 
-                        <p>
-                            {INFO.experience[1].description}
-                        </p>
+                                        <p>
+                                            {INFO.experience[1].description}
+                                        </p>
 
-                    </div>
+                                    </div>
 
-                    <div className="experience-date">
-                        {INFO.experience[1].duration}
-                    </div>
+                                    <div className="experience-date">
+                                        {INFO.experience[1].duration}
+                                    </div>
 
-                </li>
+                                </li>
 
-                <li className="experience-item">
+                                <li className="experience-item">
 
-                    <div className="experience-left">
+                                    <div className="experience-left">
 
-                        <h3>
-                            {INFO.experience[2].company}
-                            <span> {INFO.experience[2].title}</span>
-                        </h3>
+                                        <h3>
+                                            {INFO.experience[2].company}
+                                            <span> {INFO.experience[2].title}</span>
+                                        </h3>
 
-                        <p>
-                            {INFO.experience[2].description}
-                        </p>
+                                        <p>
+                                            {INFO.experience[2].description}
+                                        </p>
 
-                    </div>
+                                    </div>
 
-                    <div className="experience-date">
-                        {INFO.experience[2].duration}
-                    </div>
+                                    <div className="experience-date">
+                                        {INFO.experience[2].duration}
+                                    </div>
 
-                </li>
-                        </ul>
+                                </li>
+                            </ul>
                         </div>
 
                     </div>
@@ -114,7 +114,7 @@ function AboutmeContent() {
                         <ul className="list-group">
                             {INFO.education.map((item, index) => (
                                 <li className="education-item" key={index}>
-                                    
+
                                     <div className="education-left"><h3><strong>{item.degree}</strong></h3><p>{item.institution}</p></div>
                                     {item.duration && <div className="education-date">{item.duration}</div>}
                                 </li>

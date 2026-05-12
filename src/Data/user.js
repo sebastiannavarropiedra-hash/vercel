@@ -1,5 +1,5 @@
 import yoimage from '../assets/YO.jpg'
-
+import  '../Styles/user.css'
 const INFO = {
 	main: {
 		title: "FullStackFolio",
@@ -19,14 +19,14 @@ const INFO = {
 	homepage: {
 		title: "Full-stack web and mobile app developer.",
 		description:
-			"I am a fullstack developer with a passion for creating innovative and user-friendly web and mobile applications. With a strong foundation in both front-end and back-end technologies, I am dedicated to delivering high-quality solutions that meet the needs of users and businesses alike.",
+			"Hi, I’m Sebastian — a full‑stack developer in the final stretch of my Computer Engineering degree. I love building web and mobile applications that are not only functional but also intuitive and enjoyable to use. My focus is on blending front‑end creativity with back‑end logic to deliver solutions that feel seamless for both users and businesses. As I continue learning and growing, I’m excited to take on new challenges, collaborate with others, and turn ideas into impactful digital experiences.",
 	},
 
 	about: {
 		title: "About Me",
 		Subtitle:"I’m Sebastian I live in Costa Rica where I seek to improve my skills and grow as a developer.",
 		description:
-			"Technical support & advanced troubleshooting Operating Systems: Windows, macOS Platforms & Tools: Salesforce, Zendesk, ServiceNow Web Development: HTML, CSS, JavaScript, Responsive Design, Front-end & Back-end basics Data & Productivity: Advanced Microsoft Excel (VLOOKUP, IF, SUMIFS) Other: Industrial refrigeration systems maintenance and repair, customer service, team leadership, workflow optimization.",
+			"Technical Expertise & Support Operating Systems: Windows, macOS Platforms & Tools: Salesforce, Zendesk, ServiceNow Web Development: HTML, CSS, JavaScript, Responsive Design, Front‑end & Back‑end fundamentals Data & Productivity: Advanced Microsoft Excel  and Google Sheets \n Additional Skills Industrial refrigeration systems maintenance and repair Customer service and team leadership Workflow optimization and advanced troubleshooting.",
 		selfie: yoimage,
 	},
 

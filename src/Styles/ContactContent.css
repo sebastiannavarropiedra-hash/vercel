@@ -1,15 +1,11 @@
 .ContactContent {
     min-height: 80vh;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     text-align: center;
-
     padding: 4rem 2rem;
-
     color: white;
 }
 
@@ -18,33 +14,24 @@
     font-size: 4rem;
     color: white;
     font-weight: 700;
-
     margin-bottom: 1.5rem;
-
     letter-spacing: -2px;
 }
 
 /* DESCRIPTION */
 .ContactContent p {
     max-width: 700px;
-
     font-size: 1.1rem;
-
     line-height: 1.8;
-
     color: #b8b8b8;
-
     margin-bottom: 3rem;
 }
 
 /* EMAIL LINK */
 .ContactContent p a {
     color: #ff7a1a;
-
     text-decoration: none;
-
     font-weight: 600;
-
     transition: 0.3s ease;
 }
 
@@ -55,50 +42,63 @@
 /* SOCIAL LIST */
 .ContactContent ul {
     display: flex;
-
     gap: 1.5rem;
-
     list-style: none;
-
     padding: 0;
 }
 
 /* SOCIAL BUTTONS */
 .ContactContent ul li a {
+    position: relative;
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     width: 170px;
     height: 55px;
-
-    border: 1px solid var(--bs-link-color-rgb);
-
-    border-radius: 16px;
-
+    border: 0.5px solid var(--bs-link-color-rgb);
+    border-radius: 17px;
     background: rgba(255, 255, 255, 0.03);
-
     backdrop-filter: blur(10px);
-
     color: var(--bs-link-color-rgb);
-
     text-decoration: none;
-
     font-weight: 500;
-
     transition: all 0.3s ease;
 }
 
 /* HOVER EFFECT */
 .ContactContent ul li a:hover {
     transform: translateY(-5px);
-
     border-color: #ff7a1a;
-
     box-shadow:
         0 10px 30px rgba(255, 122, 26, 0.2);
-
     color: #ff7a1a;
 }
 
+.ContactContent ul li a::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* ocupa todo el botón */
+  border-radius: 16px; /* mismo radio que el botón */
+  padding: 2px; /* grosor del borde */
+  background: conic-gradient(from var(--angle), red, yellow, lime, aqua, blue, magenta, red);
+  --angle: 0deg;
+  animation: rotate 10s linear infinite;
+  border-image-slice: 1;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}

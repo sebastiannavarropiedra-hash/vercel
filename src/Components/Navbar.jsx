@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
   const { active } = props;
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+  return localStorage.getItem("theme") === "dark";
+});
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark-mode", darkMode);
-  }, [darkMode]);
+useEffect(() => {
+  document.documentElement.classList.toggle("dark-mode", darkMode);
+  localStorage.setItem("theme", darkMode ? "dark" : "light");
+}, [darkMode]);
 
   return (
     <div className="nav-container">
