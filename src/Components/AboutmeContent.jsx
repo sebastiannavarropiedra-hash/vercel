@@ -4,8 +4,8 @@ import "../Styles/AboutmeContent.css";
 function AboutmeContent() {
     return (
         <>
-            <div className="AboutmeContentContainerone">
-                <div className="Aboutmefirstarea">
+            <div className="AboutmeContentContainerone row">
+                <div className="Aboutmefirstarea col-md-6">
                     <div className="AboutmeTitle">
                         {INFO.about.title}
                     </div>
@@ -14,7 +14,7 @@ function AboutmeContent() {
                         {INFO.about.description}
                     </div>
                 </div>
-                <div className="AboutmeSecondarea">
+                <div className="AboutmeSecondarea col-md-5">
                     <div className="AboutmeImageContainer">
                         <div className="AboutmeImageWrapper">
                             <img src={INFO.about.selfie} alt="image not found" className="AboutmeImage" />

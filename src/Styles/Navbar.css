@@ -7,11 +7,12 @@
 
 .navbar {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     top: 1vh;
     z-index: 999;
+    width: fit-content;
 }
 
 .nav-background {
@@ -22,6 +23,7 @@
     background: #fff;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 40px;
+    margin:1em;
 }
 
 .nav-list {
@@ -29,9 +31,8 @@
     justify-content: space-between;
     list-style: none;
     align-items: center;
-    margin-left: -16px;
-    margin-right: 20px;
-    margin-top: 11px;
+   margin: 1em;
+   padding: 0%;
 }
 
 .nav-item {
@@ -53,42 +54,32 @@
     color: var(--link-color);
     transition: color 0.3s ease-in-out;
 }
+
 .theme-toggle {
-padding: 0%;
+    padding: 0%;
 }
 
 
-@media (max-width: 600px) {
-    .navbar {
-        margin-left: 25%;
-        margin-right: 25%;
-        width: 80%;
-        font-size: 80%;
-    }
 
-    .nav-background {
-        width: 80%;
-        height: 40px;
-    }
-
-    .nav-item {
-        font-weight: bold;
-    }
-}
 
 
 /* ====== RESPONSIVE TWEAKS ====== */
-@media (max-width: 992px) {
-    .search-bar {
+
+
+@media (max-width: 600px) {
+    .nav-background {
         width: 100%;
-        margin: 10px 0;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
     }
 
-    .navbar-brand {
-        font-size: 1.8rem;
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        position: static;
     }
-}
 
-.seccionnavbar {
-    text-align: center;
+    .nav-container {
+        margin: 0.5rem;
+    }
 }

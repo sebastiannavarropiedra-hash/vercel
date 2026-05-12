@@ -12,12 +12,14 @@
 
 .homepage-first-area-left-side {
     flex: 1;
-    margin: 2rem;
+    margin: 1rem;
+    padding:1rem;
 }
 
 .homepage-first-area-right-side {
     flex: 1;
-    margin: 2rem;
+    margin: 1rem;
+    padding:1rem;
 }
 
 .homepage-title {
@@ -104,7 +106,8 @@
   top: 50%;
   left: 50%;
   border-radius: 50%;
-  -webkit-animation: glow 3s linear 0s infinite alternate;
+  -webkit-animation: glow 9s linear 8s infinite alternate;
+  
 }
 
 .particles {
@@ -120,8 +123,8 @@
   position: absolute;
   top: calc(50% - 5px);
   left: calc(50% - 5px);
-  width: 10px;
-  height: 10px;
+  width: 100px;
+  height: 100px;
 }
 
 .angle {
@@ -162,7 +165,7 @@
 }
 
 .pulse{
-  -webkit-animation: pulse 1.5s linear 0s infinite alternate;
+  -webkit-animation: pulse 8s linear 0s infinite alternate;
 }
 
 
@@ -200,7 +203,7 @@
     -webkit-transform: scale(.2);
   }
   100% {
-    -webkit-transform: scale(.6);
+    -webkit-transform: scale(.8);
   }
 }
 
@@ -241,7 +244,7 @@
     box-shadow: inset 0 0 20px 20px #2693ff, 0 0 130px 10px #2693ff, inset 0 0 50px 50px #52abff;
   }
   66.67% {
-    box-shadow: inset 0 0 20px 20px #485fe8, 0 0 50px 10px #485fe8, inset 0 0 80px 80px #7d71e8;
+    box-shadow: inset 0 0 20px 20px #556be7, 0 0 50px 10px #485fe8, inset 0 0 80px 80px #7d71e8;
   }
   100% {
     box-shadow: inset 0 0 20px 20px #485fe8, 0 0 130px 10px #485fe8, inset 0 0 50px 50px #7d71e8;
@@ -271,7 +274,7 @@
 
 .rotate .angle:nth-child(2){
   /* change the angle every 2 seconds */
-  -webkit-animation: angle 4.95s steps(3) -1.65s infinite;
+  -webkit-animation: angle 4.95s steps(3) -1.65s infinite alternate;
 }
 .rotate .angle:nth-child(2) .size{
   /* change the size of the particle every 2 seconds */
@@ -283,7 +286,7 @@
 }
 .rotate .angle:nth-child(2) .position{
   /* animate the fly out of the particle and its fade out at the end */
-  -webkit-animation: position 1.65s linear 0s infinite;
+  -webkit-animation: position 1.65s linear -1.65s infinite;
 }
 
 
@@ -306,5 +309,5 @@
 
 .rotate .angle:nth-child(5) .position{
   /* animate the fly out of the particle and its fade out at the end */
-  -webkit-animation: position 2.45s linear 0s infinite;
+  -webkit-animation: position 2.45s linear 1s infinite;
 }

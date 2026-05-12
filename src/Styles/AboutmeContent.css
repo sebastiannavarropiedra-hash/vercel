@@ -10,17 +10,17 @@
 
 .Aboutmefirstarea {
     flex: 1;
-    margin-right: 2rem;
+    margin: 2rem;
 }
 
 .AboutmeSecondarea {
     flex: 1;
-    margin-right: 2rem;
+    margin: 2rem;
 }
 
 .AboutmeTitle {
     font-size: 3rem;
-    margin-bottom: 1rem;
+    margin: 1rem;
 }
 
 .AboutmeDescription {
@@ -32,7 +32,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    margin: 2rem;
 }
 
 .AboutmeImageWrapper {
@@ -239,6 +239,7 @@
     font-weight: 700;
 
 }
+
 .education-left:hover h3 {
     transform: translateY(-5px);
     border-color: #ff7a1a;
