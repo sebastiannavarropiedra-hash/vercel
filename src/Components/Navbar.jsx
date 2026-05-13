@@ -19,16 +19,16 @@ useEffect(() => {
         <div className="nav-background">
           <ul className="nav-list">
             <li className={active === "Home" ? "nav-item active" : "nav-item"}>
-              <Link to="/">Home</Link>
+              <Link to="/"><i className="fa-solid fa-house"></i>Home</Link>
             </li>
             <li className={active === "Aboutme" ? "nav-item active" : "nav-item"}>
-              <Link to="/Aboutme">About me</Link>
+              <Link to="/Aboutme"><i className="fa-solid fa-user"></i>About</Link>
             </li>
             <li className={active === "Projects" ? "nav-item active" : "nav-item"}>
-              <Link to="/Projects">Projects</Link>
+              <Link to="/Projects"><i className="fa-solid fa-briefcase"></i>Projects</Link>
             </li>
             <li className={active === "Contact" ? "nav-item active" : "nav-item"}>
-              <Link to="/contact">Contact</Link>
+              <Link to="/contact"><i className="fa-solid fa-envelope"></i>Contact</Link>
             </li>
             <li className="theme-toggle">
               <button type="button" className="btn"onClick={() => setDarkMode(!darkMode)}>
