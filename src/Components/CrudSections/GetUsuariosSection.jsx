@@ -16,6 +16,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { getUsuarios } from '../../services/apiService';
+import '../../Styles/GetUsuariosSection.css';
 
 function GetUsuariosSection() {
   const [usuarios, setUsuarios] = useState([]);
@@ -61,7 +62,7 @@ function GetUsuariosSection() {
                 <th>Estado</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="users-table-body">
               {usuarios.map((usuario) => (
                 <tr key={usuario.ID_Usuario}>
                   <td>{usuario.ID_Usuario}</td>
