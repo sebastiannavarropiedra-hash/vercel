@@ -15,6 +15,7 @@
 import React, { useState } from 'react';
 import { testApi } from '../../services/apiService';
 import '../../Styles/TestSection.css';
+import INFO from '../../Data/user';
 
 function TestSection() {
   const [testResult, setTestResult] = useState(null);
@@ -42,7 +43,7 @@ function TestSection() {
       {testResult && (
         <pre className="result-box">{JSON.stringify(testResult, null, 2)}</pre>
       )}
-      <p className="route-description2">The test endpoint is used to verify the API connection <br/>The frontEnd is located on Vercel.com so the user does not have to be logged in to use it and as web Host<br/>Render.com was used as host of the Backend API to communicate with Supabase.com database using PostgreSQl<br/>Please enjoy this DEMO of a CRUD application.<br/><i class="fa-solid fa-face-grin-beam"></i> </p>
+      <p className="route-description2">{INFO.projects[0].description}<br/><i class='fa-solid fa-face-grin-beam'></i> </p>
     </section>
   );
 }

@@ -1,5 +1,5 @@
 import yoimage from '../assets/YO.jpg'
-import  '../Styles/user.css'
+import '../Styles/user.css'
 const INFO = {
 	main: {
 		title: "FullStackFolio",
@@ -24,7 +24,7 @@ const INFO = {
 
 	about: {
 		title: "About Me",
-		Subtitle:"I’m Sebastian I live in Costa Rica where I seek to improve my skills and grow as a developer.",
+		Subtitle: "I’m Sebastian I live in Costa Rica where I seek to improve my skills and grow as a developer.",
 		description:
 			"Technical Expertise & Support Operating Systems: Windows, macOS Platforms & Tools: Salesforce, Zendesk, ServiceNow Web Development: HTML, CSS, JavaScript, Responsive Design, Front‑end & Back‑end fundamentals Data & Productivity: Advanced Microsoft Excel  and Google Sheets \n Additional Skills Industrial refrigeration systems maintenance and repair Customer service and team leadership Workflow optimization and advanced troubleshooting.",
 		selfie: yoimage,
@@ -33,7 +33,7 @@ const INFO = {
 
 	experience: [
 		{
-			Job:"Job1",
+			Job: "Job1",
 			title: "Customer Service Specialist & SME",
 			company: "-MOVATE",
 			duration: "August 2024 – Present",
@@ -46,7 +46,7 @@ const INFO = {
 		},
 
 		{
-			Job:"Job2",
+			Job: "Job2",
 			title: "Technical Support & Quality Coach",
 			company: "-CONCENTRIX CR",
 			duration: "May 2023 – August 2024",
@@ -59,7 +59,7 @@ const INFO = {
 		},
 
 		{
-			Job:"Job3",
+			Job: "Job3",
 			title: "Production Team Lead",
 			company: "-PIZZA HUT",
 			duration: "2022 – 2023",
@@ -97,12 +97,14 @@ const INFO = {
 
 	projects: [
 		{
-			title: "Project 1",
+			title: "Backend API Dashboard - CRUD Usuarios",
 			description:
-				"Lorem ipsum dolor sit amet. Et incidunt voluptatem ex tempore repellendus qui dicta nemo sit deleniti minima.",
+				"This full-stack project showcases a complete CRUD system with React handling the interactive frontend and Node.js / Express powering the backend API.It features user management with soft delete functionality, comprehensive data validation, and an intuitive dashboard for testing all API endpoints.The application is deployed across multiple platforms: Vercel for the frontend(no login required for demo), Render.com for the backend API, and Supabase.com for the PostgreSQL database. ",
 			logo: "https://cdn.jsdelivr.net/npm/programming-languages-logos/src/javascript/javascript.png",
 			linkText: "View Project",
 			link: "https://github.com",
+			technologies: "React, Node.js, Express, REST API, Database",
+			features: ["Complete CRUD Operations", "Soft Delete Functionality", "Interactive API Dashboard", "User Management", "Data Validation"]
 		},
 
 
