@@ -8,13 +8,8 @@ const INFO = {
 		logo: yoimage,
 	},
 
-	socials: {
-		github: "https://github.com/",
-		linkedin: "https://linkedin.com/",
-		instagram: "https://instagram.com/",
 
-		facebook: "https://facebook.com/",
-	},
+
 
 	homepage: {
 		title: "Full-stack web and mobile app developer.",
