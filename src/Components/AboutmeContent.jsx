@@ -35,9 +35,9 @@ function AboutmeContent() {
                     <div className="Aboutmeskillsright">
                         <div className="experience-list">
                             <ul className="list-group list-group-numbered ">
-                                <li className="experience-item active">
+                                <li className="experience-item row">
 
-                                    <div className="experience-left">
+                                    <div className="experience-left col">
 
                                         <h3>
                                             {INFO.experience[0].company}
@@ -50,15 +50,15 @@ function AboutmeContent() {
 
                                     </div>
 
-                                    <div className="experience-date">
+                                    <div className="experience-date col">
                                         {INFO.experience[0].duration}
                                     </div>
 
                                 </li>
 
-                                <li className="experience-item">
+                                <li className="experience-item row">
 
-                                    <div className="experience-left">
+                                    <div className="experience-left col">
 
                                         <h3>
                                             {INFO.experience[1].company}
@@ -71,15 +71,15 @@ function AboutmeContent() {
 
                                     </div>
 
-                                    <div className="experience-date">
+                                    <div className="experience-date col">
                                         {INFO.experience[1].duration}
                                     </div>
 
                                 </li>
 
-                                <li className="experience-item">
+                                <li className="experience-item row">
 
-                                    <div className="experience-left">
+                                    <div className="experience-left col">
 
                                         <h3>
                                             {INFO.experience[2].company}
@@ -92,7 +92,7 @@ function AboutmeContent() {
 
                                     </div>
 
-                                    <div className="experience-date">
+                                    <div className="experience-date col">
                                         {INFO.experience[2].duration}
                                     </div>
 
@@ -113,10 +113,10 @@ function AboutmeContent() {
                     <div className="Aboutmeskillsright education-list">
                         <ul className="list-group">
                             {INFO.education.map((item, index) => (
-                                <li className="education-item" key={index}>
+                                <li className="education-item row" key={index}>
 
-                                    <div className="education-left"><h3><strong>{item.degree}</strong></h3><p>{item.institution}</p></div>
-                                    {item.duration && <div className="education-date">{item.duration}</div>}
+                                    <div className="education-left col"><h3><strong>{item.degree}</strong></h3><p>{item.institution}</p></div>
+                                    {item.duration && <div className="education-date col">{item.duration}</div>}
                                 </li>
                             ))}
                         </ul>
