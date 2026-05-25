@@ -67,9 +67,11 @@
   color: var(--title-color);
 }
 
+.EmailForm {
 
+  color: var(--title-color);
 
-
+}
 
 .dark-mode {
   --text: #ffffff;
@@ -172,4 +174,3 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
-

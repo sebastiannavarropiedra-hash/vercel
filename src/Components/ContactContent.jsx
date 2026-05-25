@@ -6,8 +6,8 @@ function ContactContent() {
     return (
         <div className="ContactContent">
             <EmailForm />
-            <h1>Contacto</h1>
-            <p>Si deseas ponerte en contacto conmigo, puedes enviarme un correo electrónico a <a href="mailto:snpnavarro@outlook.com" target="_blank" rel="noopener noreferrer">snpnavarro@outlook.com</a> o seguirme en mis redes sociales:</p>
+            <br/>
+            
             <ul>
                 <li><a href="https://www.linkedin.com/in/snpnavarro90?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
                 <li><a href="https://github.com/sebastiannavarropiedra-hash" target="_blank" rel="noopener noreferrer">GitHub</a></li>
