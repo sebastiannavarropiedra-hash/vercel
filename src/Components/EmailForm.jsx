@@ -17,6 +17,7 @@ function EmailForm() {
             email: formData.email,
             message: formData.message
         });
+        if (error) setError('');
     };
     const handleEmailChange = (e) => {
         setFormData({
@@ -24,6 +25,7 @@ function EmailForm() {
             email: e.target.value,
             message: formData.message
         });
+        if (error) setError('');
     };
     const handleMessageChange = (e) => {
         setFormData({
@@ -31,13 +33,47 @@ function EmailForm() {
             email: formData.email,
             message: e.target.value
         });
+        if (error) setError('');
     };
+
+    const validate = () => {
+
+        const newErrors = {};
+
+        if (!formData.name.trim() || formData.name.length < 2) {
+            newErrors.name = 'Nombre demasiado corto';
+        }
+        if (!/^[a-zA-Z\s]+$/.test(formData.name)) {
+            newErrors.name = 'Solo letras permitidas';
+        }
+
+        if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+            newErrors.email = 'Email inválido';
+        }
+
+        if (!formData.message.trim()) {
+            newErrors.message = 'Mensaje requerido';
+        } else if (formData.message.length < 10) {
+            newErrors.message = 'Mínimo 10 caracteres';
+        } else if (formData.message.length > 500) {
+            newErrors.message = 'Máximo 500 caracteres';
+        }
+
+        return newErrors;
+
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError('');
         setSuccess(false);
+
+        const newErrors = validate();
+        setErrors(newErrors);
+        if (Object.keys(newErrors).length > 0) return;
+
+        setLoading(true);
 
         try {
             const response = await fetch('/api/sendemail', {
@@ -56,8 +92,8 @@ function EmailForm() {
         } catch (error) {
             setError('Error al enviar el mensaje');
 
-        }
-        setLoading(false);
+        } finally { setLoading(false); }
+
     }
 
 
