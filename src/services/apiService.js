@@ -117,11 +117,13 @@ export const deleteFisico = async (id) => {
   
 };
 
- export const sendEmail = async (emailData) => {
-    const response = await fetch(`${API_BASE_URL}/sendemail`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(emailData),
-    });
-    return response.json();
-  }
+ export async function sendEmail(emailData) {
+  const response = await fetch(`${API_BASE_URL}/sendemail`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(emailData),
+  });
+
+  const json = await response.json().catch(() => null);
+  return { ok: response.ok, status: response.status, body: json };
+}

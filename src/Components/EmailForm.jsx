@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import sendEmail from '../services/apiService';
+import { sendEmail } from '../services/apiService';
 
 
 function EmailForm() {
