@@ -12,6 +12,16 @@ function EmailForm() {
     const [success, setSuccess] = useState(false);
     const [errors, setErrors] = useState({});
 
+    // Keeps track of name, email, and message in formData.
+
+    // Tracks UI states:
+
+    // loading → shows "Enviando..." while waiting.
+
+    // success → shows success message after sending.
+
+    // errors → stores validation or server errors.
+
     const handleNameChange = (e) => {
         setFormData(prev => ({ ...prev, name: e.target.value }));
         if (errors.name) setErrors(prev => ({ ...prev, name: '' }));
@@ -26,6 +36,10 @@ function EmailForm() {
         setFormData(prev => ({ ...prev, message: e.target.value }));
         if (errors.message) setErrors(prev => ({ ...prev, message: '' }));
     };
+
+
+    // Each input (name, email, message) has its own handler that updates state and clears related errors when the user types.
+
 
     const validate = () => {
         const newErrors = {};
@@ -51,6 +65,19 @@ function EmailForm() {
 
         return newErrors;
     };
+
+
+    // // Validation
+
+    // Checks that:
+
+    // Name is at least 2 characters and only letters.
+
+    // Email matches a regex pattern.
+
+    // Message is between 10 and 500 characters.
+
+    // Returns an errors object if validation fails.
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -91,6 +118,22 @@ function EmailForm() {
             setLoading(false);
         }
     };
+
+    // // Form Submission
+
+    // Prevents default form behavior (e.preventDefault()).
+
+    // Runs validation before sending.
+
+    // Calls sendEmail(formData) asynchronously.
+
+    // Handles different outcomes:
+
+    // Success → clears form, shows success message.
+
+    // Backend error → shows error message from server response.
+
+    // Network/server error → shows fallback error message.
 
     return (
         <div className="EmailForm">
@@ -144,6 +187,19 @@ function EmailForm() {
             </form>
         </div>
     );
+
+
+    //     // UI Rendering
+
+    // Displays form fields with Bootstrap styling.
+
+    // Shows inline error messages under each field.
+
+    // Shows general error messages if backend/network fails.
+
+    // Shows loading state on button.
+
+    // Shows success message when email is sent.
 }
 
 export default EmailForm;
