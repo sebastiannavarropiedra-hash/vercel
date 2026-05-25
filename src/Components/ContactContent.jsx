@@ -1,9 +1,11 @@
 import React from "react";
 import '../Styles/ContactContent.css';
+import EmailForm from "./EmailForm";
 
 function ContactContent() {
     return (
         <div className="ContactContent">
+            <EmailForm />
             <h1>Contacto</h1>
             <p>Si deseas ponerte en contacto conmigo, puedes enviarme un correo electrónico a <a href="mailto:snpnavarro@outlook.com" target="_blank" rel="noopener noreferrer">snpnavarro@outlook.com</a> o seguirme en mis redes sociales:</p>
             <ul>
