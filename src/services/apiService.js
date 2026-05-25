@@ -111,4 +111,13 @@ export const deleteFisico = async (id) => {
     method: "DELETE",
   });
   return response.json();
+
+  export const sendEmail = async (emailData) => {
+    const response = await fetch(`${API_BASE_URL}/sendemail`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(emailData),
+    });
+    return response.json();
+  }
 };
