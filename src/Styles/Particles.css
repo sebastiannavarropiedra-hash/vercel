@@ -26,18 +26,25 @@
     position: relative;
     width: 30px;
     height: 30px;
-    background: #83bbff61;
+    background: #ff9f4361; /* naranja translúcido */
     margin: 0 4px;
     border-radius: 50%;
-    box-shadow: 0 0 0 10px #83bbff26, 0 0 50px #83bbff61, 0 0 100px #83bbff61;
+    box-shadow: 
+        0 0 0 10px #ff9f4326,   /* halo suave */
+        0 0 50px #ff9f4361,     /* brillo medio */
+        0 0 100px #ff9f4361;    /* brillo extendido */
     animation: animate 15s linear infinite;
     animation-duration: calc(var(--i) * 3s);
 }
 
 .bubbles span:nth-child(even) {
-    background: #ffffff4f;
-    box-shadow: 0 0 0 10px #ffffff14, 0 0 50px #ffffff4f, 0 0 100px #ffffff4f;
+    background: #ffd27f4f; /* naranja claro translúcido */
+    box-shadow: 
+        0 0 0 10px #ffd27f14,   /* halo suave */
+        0 0 50px #ffd27f4f,     /* brillo medio */
+        0 0 100px #ffd27f4f;    /* brillo extendido */
 }
+
 
 @keyframes animate {
     0% {
