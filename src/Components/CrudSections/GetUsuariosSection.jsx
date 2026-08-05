@@ -18,14 +18,24 @@ import React, { useState, useEffect } from 'react';
 import { getUsuarios } from '../../services/apiService';
 import '../../Styles/GetUsuariosSection.css';
 
-function GetUsuariosSection() {
+// If a usuarios prop is provided, render that list (shared live state).
+// Otherwise, fall back to fetching users locally.
+function GetUsuariosSection({ usuarios: usuariosProp }) {
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (Array.isArray(usuariosProp)) {
+      // Use shared data
+      setUsuarios(usuariosProp);
+      setLoading(false);
+      setError(null);
+    } else {
+      fetchData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [usuariosProp]);
 
   const fetchData = async () => {
     setLoading(true);
@@ -35,22 +45,26 @@ function GetUsuariosSection() {
       setError(null);
     } catch (err) {
       console.error(err);
-      setError("Failed to fetch users");
+      setError('Failed to fetch users');
     }
     setLoading(false);
   };
+
+  const usuariosToRender = Array.isArray(usuariosProp) ? usuariosProp : usuarios;
 
   return (
     <section className="crud-section">
       <h2 className="section-title">-GET /usuarios-</h2>
       <p className="route-description">Retrieve all active users</p>
-      <button onClick={fetchData} disabled={loading} className="crud-btn">
-        {loading ? "Loading..." : "Refresh Users"}
-      </button>
+      {!Array.isArray(usuariosProp) && (
+        <button onClick={fetchData} disabled={loading} className="crud-btn">
+          {loading ? 'Loading...' : 'Refresh Users'}
+        </button>
+      )}
       
       {error && <p className="error-message">{error}</p>}
       
-      {usuarios.length > 0 && (
+      {usuariosToRender && usuariosToRender.length > 0 && (
         <div className="table-container">
           <table className="users-table">
             <thead>
@@ -63,18 +77,22 @@ function GetUsuariosSection() {
               </tr>
             </thead>
             <tbody className="users-table-body">
-              {usuarios.map((usuario) => (
+              {usuariosToRender.map((usuario) => (
                 <tr key={usuario.ID_Usuario}>
                   <td>{usuario.ID_Usuario}</td>
                   <td>{usuario.Nombre_Usuario}</td>
                   <td>{usuario.ID_Perfil}</td>
                   <td>{usuario.Credencial_Espacial}</td>
-                  <td>{usuario.Estado ? "Activo" : "Inactivo"}</td>
+                  <td>{usuario.Estado ? 'Activo' : 'Inactivo'}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+      )}
+
+      {usuariosToRender && usuariosToRender.length === 0 && (
+        <p>No users found.</p>
       )}
     </section>
   );

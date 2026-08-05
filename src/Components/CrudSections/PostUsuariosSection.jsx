@@ -19,7 +19,8 @@
 import React, { useState } from 'react';
 import { crearUsuario } from '../../services/apiService';
 
-function PostUsuariosSection() {
+// Accepts an optional onCreated prop to integrate with a shared user list.
+function PostUsuariosSection({ onCreated }) {
   const [formData, setFormData] = useState({
     Nombre_Usuario: '',
     Credencial_Espacial: '',
@@ -40,7 +41,15 @@ function PostUsuariosSection() {
     e.preventDefault();
     setLoading(true);
     try {
-      const data = await crearUsuario(formData);
+      let data;
+      if (typeof onCreated === 'function') {
+        // Delegate creation to parent which will refresh the shared list
+        await onCreated(formData);
+        data = { ok: true };
+      } else {
+        data = await crearUsuario(formData);
+      }
+
       setResult(data);
       setFormData({
         Nombre_Usuario: '',
@@ -49,7 +58,7 @@ function PostUsuariosSection() {
       });
     } catch (error) {
       console.error(error);
-      setResult({ error: "Failed to create user" });
+      setResult({ error: 'Failed to create user' });
     }
     setLoading(false);
   };
@@ -84,7 +93,7 @@ function PostUsuariosSection() {
           required
         />
         <button type="submit" disabled={loading} className="crud-btn">
-          {loading ? "Creating..." : "Create User"}
+          {loading ? 'Creating...' : 'Create User'}
         </button>
       </form>
       
