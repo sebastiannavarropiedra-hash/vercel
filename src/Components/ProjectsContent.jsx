@@ -13,7 +13,7 @@ import ReactivateUserSection from './CrudSections/ReactivateUserSection';
 function ProjectsContent() {
 
     return (
-        <div className="dashboard-container">
+        <div className="dashboard-container container-fluid">
             <h1 className="dashboard-title">{INFO.projects[0].title}</h1>
         
             <div className="crud-sections-container">
