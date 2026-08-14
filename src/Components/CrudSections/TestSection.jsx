@@ -14,10 +14,15 @@
 
 import React, { useState } from 'react';
 import { testApi } from '../../services/apiService';
-import '../../Styles/TestSection.css';
-import INFO from '../../Data/user';
 
-function TestSection() {
+/**
+ * Hook: useTestApi
+ * Provides the logic for testing the backend /test endpoint.
+ * - testResult: response or error object
+ * - loading: boolean in-flight state
+ * - handleTest: async function to invoke the API
+ */
+export function useTestApi() {
   const [testResult, setTestResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -26,26 +31,23 @@ function TestSection() {
     try {
       const data = await testApi();
       setTestResult(data);
+      return data;
     } catch (error) {
       console.error(error);
-      setTestResult({ error: "Failed to connect" });
+      const errObj = { error: 'Failed to connect', details: error?.message };
+      setTestResult(errObj);
+      throw errObj;
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  return (
-    <section className="crud-section">
-      <h2 className="section-title">-GET /test-</h2>
-      <p className="route-description">Test endpoint to verify API connection</p>
-      <button onClick={handleTest} disabled={loading} className="crud-btn">
-        {loading ? "Testing..." : "Test Connection"}
-      </button>
-      {testResult && (
-        <pre className="result-box">{JSON.stringify(testResult, null, 2)}</pre>
-      )}
-      <p className="route-description2">{INFO.projects[0].description}<br/><i class='fa-solid fa-face-grin-beam'></i> </p>
-    </section>
-  );
+  return { testResult, loading, handleTest };
 }
 
-export default TestSection;
+/**
+ * Default export kept as a minimal component that renders null. * This preserves existing imports that expect a component while
+ * avoiding UI concerns — the logic should be consumed via useTestApi. */
+export default function TestSection() {
+  return null;
+}

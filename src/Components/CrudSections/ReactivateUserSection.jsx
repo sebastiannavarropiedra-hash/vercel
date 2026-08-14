@@ -21,55 +21,31 @@
 import React, { useState } from 'react';
 import { reactivarUsuario } from '../../services/apiService';
 
-function ReactivateUserSection() {
-  const [userId, setUserId] = useState('');
+export function useReactivateUsuario() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
 
-  const handleReactivate = async (e) => {
-    e.preventDefault();
-    if (!userId) return;
-
-    if (!window.confirm('Are you sure you want to reactivate this user?')) return;
-
+  const reactivateUsuarioById = async (id) => {
+    if (!id) throw new Error('id is required');
     setLoading(true);
+    setError(null);
     try {
-      const data = await reactivarUsuario(userId);
+      const data = await reactivarUsuario(id);
       setResult(data);
-      setUserId('');
-    } catch (error) {
-      console.error(error);
-      setResult({ error: "Failed to reactivate user" });
+      return data;
+    } catch (err) {
+      console.error(err);
+      setError(err.message || 'Failed to reactivate user');
+      setResult({ error: 'Failed to reactivate user' });
+      throw err;
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  return (
-    <section className="crud-section">
-      <h2 className="section-title">-PUT /usuarios/reactivar/:id-</h2>
-      <p className="route-description">Reactivate an inactive user</p>
-      <form onSubmit={handleReactivate} className="crud-form">
-        <input
-          type="number"
-          placeholder="Enter User ID to reactivate"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-          required
-        />
-        <button 
-          type="submit" 
-          disabled={loading} 
-          className="crud-btn reactivate-btn"
-        >
-          {loading ? "Reactivating..." : "Reactivate User"}
-        </button>
-      </form>
-
-      {result && (
-        <pre className="result-box">{JSON.stringify(result, null, 2)}</pre>
-      )}
-    </section>
-  );
+  return { loading, result, error, reactivateUsuarioById };
 }
-
-export default ReactivateUserSection;
+export default function ReactivateUserSection() {
+  return null;
+}

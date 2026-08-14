@@ -26,57 +26,32 @@
 import React, { useState } from 'react';
 import { deleteFisico } from '../../services/apiService';
 
-function DeleteFisicoSection() {
-  const [userId, setUserId] = useState('');
+export function useDeleteFisico() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
 
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    if (!userId) return;
-
-    if (!window.confirm('WARNING: This will permanently delete the user from the database. you could lose your job')) {
-      return;
-    }
-
+  const deleteFisicoById = async (id) => {
+    if (!id) throw new Error('id is required');
     setLoading(true);
+    setError(null);
     try {
-      const data = await deleteFisico(userId);
+      const data = await deleteFisico(id);
       setResult(data);
-      setUserId('');
-    } catch (error) {
-      console.error(error);
-      setResult({ error: "Failed to delete user permanently" });
+      return data;
+    } catch (err) {
+      console.error(err);
+      setError(err.message || 'Failed to delete user permanently');
+      setResult({ error: 'Failed to delete user permanently' });
+      throw err;
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  return (
-    <section className="crud-section">
-      <h2 className="section-title">-DELETE /usuarios/fisico/:id-</h2>
-      <p className="route-description">Perform a physical delete (permanent removal)</p>
-      <form onSubmit={handleDelete} className="crud-form">
-        <input
-          type="number"
-          placeholder="Enter User ID to permanently delete forever and ever"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-          required
-        />
-        <button 
-          type="submit" 
-          disabled={loading} 
-          className="crud-btn delete-btn danger"
-        >
-          {loading ? "Deleting..." : "Permanently Delete User"}
-        </button>
-      </form>
-
-      {result && (
-        <pre className="result-box">{JSON.stringify(result, null, 2)}</pre>
-      )}
-    </section>
-  );
+  return { loading, result, error, deleteFisicoById };
 }
 
-export default DeleteFisicoSection;
+export default function DeleteFisicoSection() {
+  return null;
+}

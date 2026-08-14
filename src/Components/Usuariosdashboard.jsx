@@ -1,225 +1,135 @@
-import react from "react";
-import { getUsuarios, testApi, getUsuarioById, crearUsuario, updateUsuario, deleteFisico, deleteLogico, reactivarUsuario } from "../services/apiService";
-import { useState, useEffect } from "react";
-import INFO from '../../Data/user';
-
+import React, { useState, useEffect } from "react";
+import INFO from '../Data/user';
+import { useTestApi } from "./CrudSections/TestSection";
+import { useGetUsuarios } from "./CrudSections/GetUsuariosSection";
+import { useGetUsuarioById } from "./CrudSections/GetUsuarioByIdSection";
+import { usePostUsuario } from "./CrudSections/PostUsuariosSection";
+import { useUpdateUsuario } from "./CrudSections/PutUpdateSection";
+import { useDeleteLogico } from "./CrudSections/DeleteLogicoSection";
+import { useDeleteFisico } from "./CrudSections/DeleteFisicoSection";
+import { useReactivateUsuario } from "./CrudSections/ReactivateUserSection";
 
 function UsuariosDashboard() {
-    /* test section */
-    const [testResult, setTestResult] = useState(null);
-    const [loading, setLoading] = useState(false);
+  // test API hook (kept from before)
+  const { testResult, loading: loadingTest, handleTest } = useTestApi();
 
-    const handleTest = async () => {
-        setLoading(true);
-        try {
-            const data = await testApi();
-            setTestResult(data);
-        } catch (error) {
-            console.error(error);
-            setTestResult({ error: "Failed to connect" });
-        }
-        setLoading(false);
-    };
+  // CRUD logic hooks
+  const { usuarios = [], loading: loadingUsuarios, error: usuariosError, fetchUsuarios } = useGetUsuarios();
+  const { usuario, loading: loadingUsuarioById, error: usuarioByIdError, fetchUsuarioById } = useGetUsuarioById();
+  const { loading: loadingPostUsuario, result: postResult, error: postError, postUsuario } = usePostUsuario();
+  const { loading: loadingUpdateUsuario, result: updateResult, error: updateError, updateUsuarioByData } = useUpdateUsuario();
+  const { loading: loadingDeleteLogico, result: deleteLogicoResult, error: deleteLogicoError, deleteLogicoById } = useDeleteLogico();
+  const { loading: loadingDeleteFisico, result: deleteFisicoResult, error: deleteFisicoError, deleteFisicoById } = useDeleteFisico();
+  const { loading: loadingReactivate, result: reactivateResult, error: reactivateError, reactivateUsuarioById } = useReactivateUsuario();
 
+  // UI state
+  const [activeTab, setActiveTab] = useState('active'); // 'active' | 'inactive'
+  const [query, setQuery] = useState('');
 
-    /* Get Usuarios */
+  // form state
+  const [showForm, setShowForm] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({ Nombre_Usuario: '', Credencial_Espacial: '', ID_Perfil: '' });
+  const [editingId, setEditingId] = useState(null);
 
+  useEffect(() => {
+    // ensure users are loaded on mount
+    fetchUsuarios().catch(() => {});
+  }, []);
 
-    const [usuarios, setUsuarios] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const openCreateForm = () => {
+    setFormData({ Nombre_Usuario: '', Credencial_Espacial: '', ID_Perfil: '' });
+    setEditingId(null);
+    setIsEditing(false);
+    setShowForm(true);
+  };
 
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        setLoading(true);
-        try {
-            const data = await getUsuarios();
-            setUsuarios(data.datos || []);
-            setError(null);
-        } catch (err) {
-            console.error(err);
-            setError("Failed to fetch users");
-        }
-        setLoading(false);
-    };
-
-
-    /* getusuariosID */
-
-    const [userId, setUserId] = useState('');
-    const [usuario, setUsuario] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-
-    const handleSearch = async (e) => {
-        e.preventDefault();
-        if (!userId) return;
-
-        setLoading(true);
-        setError(null);
-        try {
-            const data = await getUsuarioById(userId);
-            const usuarioEncontrado = Array.isArray(data.datos) ? data.datos[0] : data.datos || data;
-            setUsuario(usuarioEncontrado || null);
-            if (!usuarioEncontrado) {
-                setError('Usuario no encontrado');
-            }
-        } catch (err) {
-            console.error(err);
-            setError("Failed to fetch user");
-            setUsuario(null);
-        }
-        setLoading(false);
-    };
-
-    /* Postusuarios */
-    const [formData, setFormData] = useState({
-        Nombre_Usuario: '',
-        Credencial_Espacial: '',
-        ID_Perfil: '',
+  const openEditForm = (u) => {
+    setFormData({
+      ID_Usuario: u.ID_Usuario,
+      Nombre_Usuario: u.Nombre_Usuario || '',
+      Credencial_Espacial: u.Credencial_Espacial || '',
+      ID_Perfil: u.ID_Perfil || '',
     });
-    const [loading, setLoading] = useState(false);
-    const [result, setResult] = useState(null);
+    setEditingId(u.ID_Usuario);
+    setIsEditing(true);
+    setShowForm(true);
+  };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        try {
-            const data = await crearUsuario(formData);
-            setResult(data);
-            setFormData({
-                Nombre_Usuario: '',
-                Credencial_Espacial: '',
-                ID_Perfil: '',
-            });
-        } catch (error) {
-            console.error(error);
-            setResult({ error: "Failed to create user" });
-        }
-        setLoading(false);
-    };
-
-    /* Putusuarios */
-    function PutUpdateSection() {
-        const [formData, setFormData] = useState({
-            ID_Usuario: '',
-            Nombre_Usuario: '',
-            Credencial_Espacial: '',
-            ID_Perfil: '',
-        });
-        const [loading, setLoading] = useState(false);
-        const [result, setResult] = useState(null);
-
-        const handleChange = (e) => {
-            const { name, value } = e.target;
-            setFormData((prev) => ({
-                ...prev,
-                [name]: value,
-            }));
-        };
-
-        const handleSubmit = async (e) => {
-            e.preventDefault();
-            setLoading(true);
-            try {
-                const data = await updateUsuario(formData);
-                setResult(data);
-            } catch (error) {
-                console.error(error);
-                setResult({ error: "Failed to update user" });
-            }
-            setLoading(false);
-        };
-
-        /* Deletelogico */
-
-        const [userId, setUserId] = useState('');
-        const [loading, setLoading] = useState(false);
-        const [result, setResult] = useState(null);
-
-        const handleDelete = async (e) => {
-            e.preventDefault();
-            if (!userId) return;
-
-            if (!window.confirm('Are you sure you want to mark this user as inactive(Wont appear on active users list)?')) return;
-
-            setLoading(true);
-            try {
-                const data = await deleteLogico(userId);
-                setResult(data);
-                setUserId('');
-            } catch (error) {
-                console.error(error);
-                setResult({ error: "Failed to delete user logically" });
-            }
-            setLoading(false);
-        };
-
-        /* deletefisico */
-        const [userId, setUserId] = useState('');
-        const [loading, setLoading] = useState(false);
-        const [result, setResult] = useState(null);
-
-        const handleDelete = async (e) => {
-            e.preventDefault();
-            if (!userId) return;
-
-            if (!window.confirm('WARNING: This will permanently delete the user from the database. you could lose your job')) {
-                return;
-            }
-
-            setLoading(true);
-            try {
-                const data = await deleteFisico(userId);
-                setResult(data);
-                setUserId('');
-            } catch (error) {
-                console.error(error);
-                setResult({ error: "Failed to delete user permanently" });
-            }
-            setLoading(false);
-        };
-
-        /* reactivate user */
-        const [userId, setUserId] = useState('');
-        const [loading, setLoading] = useState(false);
-        const [result, setResult] = useState(null);
-
-        const handleReactivate = async (e) => {
-            e.preventDefault();
-            if (!userId) return;
-
-            if (!window.confirm('Are you sure you want to reactivate this user?')) return;
-
-            setLoading(true);
-            try {
-                const data = await reactivarUsuario(userId);
-                setResult(data);
-                setUserId('');
-            } catch (error) {
-                console.error(error);
-                setResult({ error: "Failed to reactivate user" });
-            }
-            setLoading(false);
-        };
-
-
-
-
-        return ("1")
-
+  const handleCreate = async (e) => {
+    e.preventDefault();
+    try {
+      await postUsuario(formData);
+      await fetchUsuarios();
+      setShowForm(false);
+      alert('Usuario creado');
+    } catch (err) {
+      console.error(err);
+      alert('Error creating usuario');
     }
+  };
 
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const payload = { ...formData };
+      // ensure ID present
+      if (!payload.ID_Usuario) {
+        alert('ID required for update');
+        return;
+      }
+      await updateUsuarioByData(payload);
+      await fetchUsuarios();
+      setShowForm(false);
+      setIsEditing(false);
+      setEditingId(null);
+      alert('Usuario actualizado');
+    } catch (err) {
+      console.error(err);
+      alert('Error updating usuario');
+    }
+  };
+
+  const handleDeactivate = async (id) => {
+    if (!id) return;
+    if (!window.confirm('Are you sure you want to mark this user as inactive?')) return;
+    try {
+      await deleteLogicoById(id);
+      await fetchUsuarios();
+      alert('User deactivated');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to deactivate user');
+    }
+  };
+
+  const handleReactivate = async (id) => {
+    if (!id) return;
+    try {
+      await reactivateUsuarioById(id);
+      await fetchUsuarios();
+      alert('User reactivated');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to reactivate user');
+    }
+  };
+
+  const filteredUsuarios = usuarios.filter(u => {
+    if (!u) return false;
+    const matchesQuery = query.trim() === '' || (u.Nombre_Usuario && u.Nombre_Usuario.toString().toLowerCase().includes(query.trim().toLowerCase()));
+    const isActive = activeTab === 'active' ? !!u.Estado : !u.Estado;
+    return matchesQuery && isActive;
+  });
+
+  return (
+    "1"
+  );
 }
-    export default UsuariosDashboard;
+
+export default UsuariosDashboard;
