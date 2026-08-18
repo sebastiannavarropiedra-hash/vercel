@@ -23,7 +23,7 @@
 import React, { useState } from 'react';
 import { updateUsuario } from '../../services/apiService';
 
-function PutUpdateSection() {
+export function usePutUpdateSection() {
   const [formData, setFormData] = useState({
     ID_Usuario: '',
     Nombre_Usuario: '',
@@ -54,7 +54,7 @@ function PutUpdateSection() {
     setLoading(false);
   };
 
-  return (
+  return /* (
     <section className="crud-section">
       <h2 className="section-title">-PUT /update-</h2>
       <p className="route-description">Update an existing user(This overwrites the user data)</p>
@@ -97,7 +97,7 @@ function PutUpdateSection() {
         <pre className="result-box">{JSON.stringify(result, null, 2)}</pre>
       )}
     </section>
-  );
+   */{ formData, setFormData, loading, result, handleChange, handleSubmit };
 }
 
-export default PutUpdateSection;
+export default function PutUpdateSection() { return null; };

@@ -19,7 +19,7 @@
 import React, { useState } from 'react';
 import { crearUsuario } from '../../services/apiService';
 
-function PostUsuariosSection() {
+export function usePostUsuariosSection() {
   const [formData, setFormData] = useState({
     Nombre_Usuario: '',
     Credencial_Espacial: '',
@@ -54,7 +54,7 @@ function PostUsuariosSection() {
     setLoading(false);
   };
 
-  return (
+  return /* (
     <section className="crud-section">
       <h2 className="section-title">-POST /usuarios-</h2>
       <p className="route-description">Create a new user(users will be generated an user ID automatically)</p>
@@ -92,7 +92,7 @@ function PostUsuariosSection() {
         <pre className="result-box">{JSON.stringify(result, null, 2)}</pre>
       )}
     </section>
-  );
+  ) */{loading, result, error, postUsuarioByData, handleSubmit, formData, setFormData, handleChange};
 }
 
-export default PostUsuariosSection;
+export default function PostUsuariosSection() { return null; };

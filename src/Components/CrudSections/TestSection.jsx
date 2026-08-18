@@ -33,7 +33,7 @@ function TestSection() {
     setLoading(false);
   };
 
-  return (
+  return /* (
     <section className="crud-section">
       <h2 className="section-title">-GET /test-</h2>
       <p className="route-description">Test endpoint to verify API connection</p>
@@ -45,7 +45,7 @@ function TestSection() {
       )}
       <p className="route-description2">{INFO.projects[0].description}<br/><i class='fa-solid fa-face-grin-beam'></i> </p>
     </section>
-  );
+  ) */{testResult, loading, handleTest};
 }
 
-export default TestSection;
+export default function TestSection() { return null; };

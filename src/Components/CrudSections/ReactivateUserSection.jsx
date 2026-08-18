@@ -21,7 +21,7 @@
 import React, { useState } from 'react';
 import { reactivarUsuario } from '../../services/apiService';
 
-function ReactivateUserSection() {
+export function useReactivateUserSection() {
   const [userId, setUserId] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -44,7 +44,7 @@ function ReactivateUserSection() {
     setLoading(false);
   };
 
-  return (
+  return /* (
     <section className="crud-section">
       <h2 className="section-title">-PUT /usuarios/reactivar/:id-</h2>
       <p className="route-description">Reactivate an inactive user</p>
@@ -69,7 +69,7 @@ function ReactivateUserSection() {
         <pre className="result-box">{JSON.stringify(result, null, 2)}</pre>
       )}
     </section>
-  );
+  ) */{ loading, result, error, reactivateUsuarioById };
 }
 
-export default ReactivateUserSection;
+export default function ReactivateUserSection() { return null; };

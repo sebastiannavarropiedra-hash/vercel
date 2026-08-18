@@ -16,9 +16,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { getUsuarios } from '../../services/apiService';
-import '../../Styles/GetUsuariosSection.css';
 
-function GetUsuariosSection() {
+export function useGetUsuariosSection() {
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -40,8 +39,8 @@ function GetUsuariosSection() {
     setLoading(false);
   };
 
-  return (
-    <section className="crud-section">
+  return
+    /* <section className="crud-section">
       <h2 className="section-title">-GET /usuarios-</h2>
       <p className="route-description">Retrieve all active users</p>
       <button onClick={fetchData} disabled={loading} className="crud-btn">
@@ -76,8 +75,10 @@ function GetUsuariosSection() {
           </table>
         </div>
       )}
-    </section>
-  );
-}
+    </section> */{ usuarios, loading, error, fetchData };
+  }
 
-export default GetUsuariosSection;
+
+export default function GetUsuariosSection() {
+  return null;
+}

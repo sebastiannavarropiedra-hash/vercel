@@ -20,7 +20,7 @@
 import React, { useState } from 'react';
 import { getUsuarioById } from '../../services/apiService';
 
-function GetUsuarioByIdSection() {
+export function useGetUsuarioByIdSection() {
   const [userId, setUserId] = useState('');
   const [usuario, setUsuario] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -47,7 +47,7 @@ function GetUsuarioByIdSection() {
     setLoading(false);
   };
 
-  return (
+  return/*  (
     <section className="crud-section">
       <h2 className="section-title">-GET /usuarios/:id-</h2>
       <p className="route-description">Retrieve a single user by ID</p>
@@ -91,7 +91,9 @@ function GetUsuarioByIdSection() {
         </div>
       )}
     </section>
-  );
+  ) */{ userId, setUserId, usuario, loading, error, handleSearch };
 }
 
-export default GetUsuarioByIdSection;
+export default function GetUsuarioByIdSection() {
+  return null;
+}
