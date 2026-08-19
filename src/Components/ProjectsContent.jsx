@@ -9,6 +9,7 @@ import PutUpdateSection from './CrudSections/PutUpdateSection';
 import DeleteLogicoSection from './CrudSections/DeleteLogicoSection';
 import DeleteFisicoSection from './CrudSections/DeleteFisicoSection';
 import ReactivateUserSection from './CrudSections/ReactivateUserSection';
+import UsuariosDashboard from './Usuariosdashboard';
 
 function ProjectsContent() {
 
@@ -17,15 +18,15 @@ function ProjectsContent() {
             <h1 className="dashboard-title">{INFO.projects[0].title}</h1>
         
             <div className="crud-sections-container">
-                
+                <UsuariosDashboard />
                 <TestSection />
                 <GetUsuariosSection />
                 <PostUsuariosSection />
                 <GetUsuarioByIdSection />
                 <PutUpdateSection />
-                <ReactivateUserSection />
                 <DeleteLogicoSection />
                 <DeleteFisicoSection />
+                <ReactivateUserSection />
             </div>
         </div>
     );
