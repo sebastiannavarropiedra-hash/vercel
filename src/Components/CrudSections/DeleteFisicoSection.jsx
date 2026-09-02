@@ -51,7 +51,8 @@ export function useDeleteFisicoSection() {
     setLoading(false);
   };
 
-  return /* (
+  return { userId, setUserId, loading, result, handleDelete };
+}/* (
     <section className="crud-section">
       <h2 className="section-title">-DELETE /usuarios/fisico/:id-</h2>
       <p className="route-description">Perform a physical delete (permanent removal)</p>
@@ -76,8 +77,7 @@ export function useDeleteFisicoSection() {
         <pre className="result-box">{JSON.stringify(result, null, 2)}</pre>
       )}
     </section>
-  ) */{ userId, setUserId, loading, result, handleDelete };
-}
+  ) */
 
 export default function DeleteFisicoSection() {
   return null;

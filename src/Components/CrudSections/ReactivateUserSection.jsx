@@ -44,7 +44,8 @@ export function useReactivateUserSection() {
     setLoading(false);
   };
 
-  return /* (
+  return { loading, result, error, reactivateUsuarioById };
+}/* (
     <section className="crud-section">
       <h2 className="section-title">-PUT /usuarios/reactivar/:id-</h2>
       <p className="route-description">Reactivate an inactive user</p>
@@ -69,7 +70,6 @@ export function useReactivateUserSection() {
         <pre className="result-box">{JSON.stringify(result, null, 2)}</pre>
       )}
     </section>
-  ) */{ loading, result, error, reactivateUsuarioById };
-}
+  ) */
 
 export default function ReactivateUserSection() { return null; };

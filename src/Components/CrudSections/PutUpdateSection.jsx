@@ -54,7 +54,9 @@ export function usePutUpdateSection() {
     setLoading(false);
   };
 
-  return /* (
+  return { formData, setFormData, loading, result, handleChange, handleSubmit };
+}
+/* (
     <section className="crud-section">
       <h2 className="section-title">-PUT /update-</h2>
       <p className="route-description">Update an existing user(This overwrites the user data)</p>
@@ -97,7 +99,5 @@ export function usePutUpdateSection() {
         <pre className="result-box">{JSON.stringify(result, null, 2)}</pre>
       )}
     </section>
-   */{ formData, setFormData, loading, result, handleChange, handleSubmit };
-}
-
+   */
 export default function PutUpdateSection() { return null; };

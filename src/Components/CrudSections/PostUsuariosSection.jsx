@@ -54,7 +54,9 @@ export function usePostUsuariosSection() {
     setLoading(false);
   };
 
-  return /* (
+  return {loading, result, error, postUsuarioByData, handleSubmit, formData, setFormData, handleChange};
+}
+/* (
     <section className="crud-section">
       <h2 className="section-title">-POST /usuarios-</h2>
       <p className="route-description">Create a new user(users will be generated an user ID automatically)</p>
@@ -92,7 +94,5 @@ export function usePostUsuariosSection() {
         <pre className="result-box">{JSON.stringify(result, null, 2)}</pre>
       )}
     </section>
-  ) */{loading, result, error, postUsuarioByData, handleSubmit, formData, setFormData, handleChange};
-}
-
+  ) */
 export default function PostUsuariosSection() { return null; };

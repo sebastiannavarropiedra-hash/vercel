@@ -47,7 +47,9 @@ export function useGetUsuarioByIdSection() {
     setLoading(false);
   };
 
-  return/*  (
+  return { userId, setUserId, usuario, loading, error, handleSearch };
+}
+/*  (
     <section className="crud-section">
       <h2 className="section-title">-GET /usuarios/:id-</h2>
       <p className="route-description">Retrieve a single user by ID</p>
@@ -91,9 +93,7 @@ export function useGetUsuarioByIdSection() {
         </div>
       )}
     </section>
-  ) */{ userId, setUserId, usuario, loading, error, handleSearch };
-}
-
+  ) */
 export default function GetUsuarioByIdSection() {
   return null;
 }

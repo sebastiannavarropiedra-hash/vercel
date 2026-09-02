@@ -48,7 +48,9 @@ export function useDeleteLogicoSection() {
     setLoading(false);
   };
 
-  return /* {(
+  return { userId, setUserId, loading, result, handleDelete };
+}
+/* {(
       <section className="crud-section">
         <h2 className="section-title">-DELETE /usuarios/logico/:id-</h2>
         <p className="route-description">Perform a logical delete (mark as inactive)</p>
@@ -73,9 +75,7 @@ export function useDeleteLogicoSection() {
           <pre className="result-box">{JSON.stringify(result, null, 2)}</pre>
         )}
       </section>
-    )} */{ userId, setUserId, loading, result, handleDelete };
-}
-
+    )} */
 export default function DeleteLogicoSection() {
   return null;
 }
