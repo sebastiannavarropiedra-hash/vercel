@@ -54,7 +54,14 @@ export function usePostUsuariosSection() {
     setLoading(false);
   };
 
-  return {loading, result, error, postUsuarioByData, handleSubmit, formData, setFormData, handleChange};
+  return {
+    loading,
+    result,
+    formData,
+    setFormData,
+    handleChange,
+    handleSubmit
+  };
 }
 /* (
     <section className="crud-section">

@@ -19,14 +19,7 @@ function ProjectsContent() {
         
             <div className="crud-sections-container">
                 <UsuariosDashboard/>
-                <TestSection />
-                <GetUsuariosSection />
-                <PostUsuariosSection />
-                <GetUsuarioByIdSection />
-                <PutUpdateSection />
-                <DeleteLogicoSection />
-                <DeleteFisicoSection />
-                <ReactivateUserSection />
+                <br></br>
             </div>
         </div>
     );

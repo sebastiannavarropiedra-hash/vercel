@@ -44,32 +44,40 @@ export function useReactivateUserSection() {
     setLoading(false);
   };
 
-  return { loading, result, error, reactivateUsuarioById };
-}/* (
-    <section className="crud-section">
-      <h2 className="section-title">-PUT /usuarios/reactivar/:id-</h2>
-      <p className="route-description">Reactivate an inactive user</p>
-      <form onSubmit={handleReactivate} className="crud-form">
-        <input
-          type="number"
-          placeholder="Enter User ID to reactivate"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-          required
-        />
-        <button 
-          type="submit" 
-          disabled={loading} 
-          className="crud-btn reactivate-btn"
-        >
-          {loading ? "Reactivating..." : "Reactivate User"}
-        </button>
-      </form>
+  return {
+    loading,
+    result,
+    userId,
+    setUserId,
+    handleReactivate
+  };
+}
 
-      {result && (
-        <pre className="result-box">{JSON.stringify(result, null, 2)}</pre>
-      )}
-    </section>
-  ) */
+/* (
+  <section className="crud-section">
+    <h2 className="section-title">-PUT /usuarios/reactivar/:id-</h2>
+    <p className="route-description">Reactivate an inactive user</p>
+    <form onSubmit={handleReactivate} className="crud-form">
+      <input
+        type="number"
+        placeholder="Enter User ID to reactivate"
+        value={userId}
+        onChange={(e) => setUserId(e.target.value)}
+        required
+      />
+      <button 
+        type="submit" 
+        disabled={loading} 
+        className="crud-btn reactivate-btn"
+      >
+        {loading ? "Reactivating..." : "Reactivate User"}
+      </button>
+    </form>
+
+    {result && (
+      <pre className="result-box">{JSON.stringify(result, null, 2)}</pre>
+    )}
+  </section>
+) */
 
 export default function ReactivateUserSection() { return null; };
