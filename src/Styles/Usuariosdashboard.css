@@ -1,3 +1,7 @@
 .dashboard-header .navbar {
- width: auto;
+    width: 100%;
+}
+
+.dashboard-sidebar {
+    margin: 0;
 }
