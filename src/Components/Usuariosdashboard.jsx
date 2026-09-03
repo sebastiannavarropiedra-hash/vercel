@@ -63,6 +63,86 @@ function UsuariosDashboard() {
                         </div>
                     </header>
                 </div>
+                <div className="dashboard-sidebar row">
+                    <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                        <div className="position-sticky pt-3">
+                            <ul className="nav flex-column">
+                                <li className="nav-item">
+                                    <a className="nav-link active" aria-current="page" href="#">
+
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#">
+
+                                        Orders
+                                    </a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#">
+
+                                        Products
+                                    </a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#">
+
+                                        Customers
+                                    </a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#">
+
+                                        Reports
+                                    </a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link" href="#">
+
+                                        Integrations
+                                    </a>
+                                </li>
+                            </ul>
+
+
+                        </div>
+                    </nav>
+
+                    <div className="Dashboard-table col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Handle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
             </div>
 
         </div>
