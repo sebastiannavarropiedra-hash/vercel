@@ -19,7 +19,7 @@ function ProjectsContent() {
         
             <div className="crud-sections-container">
                 <UsuariosDashboard/>
-                <br></br>
+                
             </div>
         </div>
     );

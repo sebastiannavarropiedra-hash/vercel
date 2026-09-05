@@ -14,8 +14,8 @@ function UsuariosDashboard() {
     /* test api hook */
     const { testResult, loading: loadingTest, handleTest } = useTestApi();
     /* CRUD hooks */
-    const { usuarios = [], loading: loadingGetUsuarios, handleGetUsuarios, fetchData: fetchUsuarios } = useGetUsuariosSection();
-    const { error: errorGetById } = useGetUsuarioByIdSection();
+    const { usuarios = [], loading: loadingGetUsuarios, handleGetUsuarios, error: errorGetUsuarios, fetchData: fetchUsuarios } = useGetUsuariosSection();
+    const { userId, setUserId, usuario, loading: loadingGetUsuarioById, error: errorGetUsuarioById, handleSearch } = useGetUsuarioByIdSection();
     const { result: resultPost, error: errorPost, formData: formDataPost, setFormData: setFormDataPost, handleChange: handleChangePost } = usePostUsuariosSection();
     const { formData: formDataPut, setFormData: setFormDataPut, result: resultPut, handleChange: handleChangePut } = usePutUpdateSection();
     const { userId: userIdDeleteLogico, setUserId: setUserIdDeleteLogico } = useDeleteLogicoSection();
@@ -46,110 +46,89 @@ function UsuariosDashboard() {
 
 
     return (
-
         <div className="usuarios-main">
             <div className="usuarios-dashboard">
                 <div className="dashboard-header">
-                    <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap  shadow">
-                        <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">CRUD Users</a>
-                        <button className="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <input className="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"></input>
+                    <header className="navbar navbar-dark sticky-top bg-dark flex-nowrap shadow">
+                        <a className="navbar-brand" >CRUD Users</a>
+
+                        <input className="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" />
                         <div className="navbar-nav">
                             <div className="nav-item text-nowrap">
-                                <a className="nav-link px-3" href="#">Sign out</a>
+                                <a className="nav-link px-3" >Sign out</a>
                             </div>
                         </div>
+                        <button className="navbar-toggler  d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
                     </header>
                 </div>
-                <div className="dashboard-sidebar row">
-                    <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                        <div className="position-sticky pt-3">
-                            <ul className="nav flex-column">
-                                <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="#">
 
-                                        Dashboard
+                <div className="dashboard-content row m-0 ">
+
+                    {/* Sidebar */}
+                    <div className="dashboard-sidebar col-lg-2  p-0 collapse d-md-block " id="sidebarMenu">
+                        <div className="d-flex flex-column   bg-dark h-100 " >
+
+
+                            <ul className="nav nav-pills flex-column  ">
+                                <li className="nav-item">
+                                    <a className="nav-link-color active" aria-current="page">
+                                        Home
                                     </a>
                                 </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">
-
-                                        Orders
-                                    </a>
+                                <li><a className="nav-link text-white">Dashboard</a>
                                 </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">
 
-                                        Products
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">
-
-                                        Customers
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">
-
-                                        Reports
-                                    </a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">
-
-                                        Integrations
-                                    </a>
-                                </li>
                             </ul>
 
 
                         </div>
-                    </nav>
-
-                    <div className="Dashboard-table col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
 
+                  
+                    {/* Main content */}
+                    <div className="dashboard-table col p-0 bg-dark">
+
+                        <button onClick={fetchUsuarios} disabled={loadingGetUsuarios} className="crud-btn">
+                            {loadingGetUsuarios ? "Loading..." : "Refresh Users"}
+                        </button>
+
+                        {errorGetUsuarios && <p className="error-message">{errorGetUsuarios}</p>}
+
+                        {usuarios.length > 0 && (
+                            <div className="table-container">
+                                <table className="users-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID usuario</th>
+                                            <th>Nombre</th>
+                                            <th>ID Perfil</th>
+                                            <th>Credencial</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="users-table-body">
+                                        {usuarios.map((usuario) => (
+                                            <tr key={usuario.ID_Usuario}>
+                                                <td>{usuario.ID_Usuario}</td>
+                                                <td>{usuario.Nombre_Usuario}</td>
+                                                <td>{usuario.ID_Perfil}</td>
+                                                <td>{usuario.Credencial_Espacial}</td>
+                                                <td>{usuario.Estado ? "Activo" : "Inactivo"}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
+                    </div>
                 </div>
+
+
             </div>
-
-        </div>
-
+        </div >
     );
-
 }
-
 
 export default UsuariosDashboard;
