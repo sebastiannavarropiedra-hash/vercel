@@ -43,10 +43,31 @@ function UsuariosDashboard() {
 
     useEffect(() => { fetchUsuarios().catch(() => { }); }, []);
 
+    useEffect(() => {
+        // Check immediately when the component mounts
+        handleTest();
 
+        // Then check every 1 minute
+        const interval = setInterval(() => {
+            handleTest();
+        }, 60 * 1000);
+
+        // Clean up when the component unmounts
+        return () => clearInterval(interval);
+    }, [handleTest]);
 
     return (
+
         <div className="usuarios-main">
+            <div>
+                {loadingTest ? (
+                    <span>Checking status...</span>
+                ) : testResult ? (
+                    <span>Base is online</span>
+                ) : (
+                    <span>Base is offline</span>
+                )}
+            </div>
             <div className="usuarios-dashboard">
                 <div className="dashboard-header">
                     <header className="navbar navbar-dark sticky-top bg-dark flex-nowrap shadow">
@@ -74,10 +95,14 @@ function UsuariosDashboard() {
                             <ul className="nav nav-pills flex-column  ">
                                 <li className="nav-item">
                                     <a className="nav-link-color active" aria-current="page">
-                                        Home
+                                        Create
                                     </a>
                                 </li>
-                                <li><a className="nav-link text-white">Dashboard</a>
+                                <li><a className="nav-link text-white">Update</a>
+                                </li>
+                                <li><a className="nav-link text-white">Delete</a>
+                                </li>
+                                <li><a className="nav-link text-white">Reactivate</a>
                                 </li>
 
                             </ul>
@@ -86,7 +111,7 @@ function UsuariosDashboard() {
                         </div>
                     </div>
 
-                  
+
                     {/* Main content */}
                     <div className="dashboard-table col p-0 bg-dark">
 

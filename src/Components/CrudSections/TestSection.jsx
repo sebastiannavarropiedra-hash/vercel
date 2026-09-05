@@ -12,7 +12,7 @@
  * - handleTest: Makes the test API call and displays the result
  */
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { testApi } from '../../services/apiService';
 
 /**
@@ -26,7 +26,7 @@ export function useTestApi() {
   const [testResult, setTestResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleTest = async () => {
+  const handleTest = useCallback(async () => {
     setLoading(true);
     try {
       const data = await testApi();
@@ -40,7 +40,7 @@ export function useTestApi() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   return { testResult, loading, handleTest };
 }
