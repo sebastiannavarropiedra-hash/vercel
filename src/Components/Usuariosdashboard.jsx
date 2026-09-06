@@ -15,7 +15,7 @@ function UsuariosDashboard() {
     const { testResult, loading: loadingTest, handleTest } = useTestApi();
     /* CRUD hooks */
     const { usuarios = [], loading: loadingGetUsuarios, handleGetUsuarios, error: errorGetUsuarios, fetchData: fetchUsuarios } = useGetUsuariosSection();
-    const { userId, setUserId, usuario, loading: loadingGetUsuarioById, error: errorGetUsuarioById, handleSearch } = useGetUsuarioByIdSection();
+    const { userId, setUserId, usuario=[], loading: loadingGetUsuarioById, error: errorGetUsuarioById, handleSearch } = useGetUsuarioByIdSection();
     const { result: resultPost, error: errorPost, formData: formDataPost, setFormData: setFormDataPost, handleChange: handleChangePost } = usePostUsuariosSection();
     const { formData: formDataPut, setFormData: setFormDataPut, result: resultPut, handleChange: handleChangePut } = usePutUpdateSection();
     const { userId: userIdDeleteLogico, setUserId: setUserIdDeleteLogico } = useDeleteLogicoSection();
@@ -32,6 +32,8 @@ function UsuariosDashboard() {
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({ Nombre_Usuario: '', Credencial_Espacial: '', ID_Perfil: '' });
     const [editingId, setEditingId] = useState(null);
+    /* estado para manejar los usuarios seleccionados */
+    const [selectedUsers, setSelectedUsers] = useState([]);
 
 
 
@@ -56,6 +58,8 @@ function UsuariosDashboard() {
         return () => clearInterval(interval);
     }, [handleTest]);
 
+  
+
     return (
 
         <div className="usuarios-main">
@@ -63,27 +67,65 @@ function UsuariosDashboard() {
                 {loadingTest ? (
                     <span>Checking status...</span>
                 ) : testResult ? (
-                    <span>Base is online</span>
+                    <span>Base is online </span>
                 ) : (
                     <span>Base is offline</span>
                 )}
             </div>
             <div className="usuarios-dashboard">
                 <div className="dashboard-header">
-                    <header className="navbar navbar-dark sticky-top bg-dark flex-nowrap shadow">
-                        <a className="navbar-brand" >CRUD Users</a>
+    <header className="navbar navbar-dark sticky-top bg-dark flex-nowrap shadow">
 
-                        <input className="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" />
-                        <div className="navbar-nav">
-                            <div className="nav-item text-nowrap">
-                                <a className="nav-link px-3" >Sign out</a>
-                            </div>
-                        </div>
-                        <button className="navbar-toggler  d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                    </header>
-                </div>
+        <a className="navbar-brand">
+            CRUD Users
+        </a>
+
+        <form
+            onSubmit={handleSearch}
+            className="d-flex w-100 mx-3"
+        >
+            <input
+                className="form-control form-control-dark"
+                type="number"
+                placeholder="Enter User ID"
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
+                required
+                aria-label="Search user by ID"
+            />
+
+            <button
+                type="submit"
+                disabled={loadingGetUsuarioById}
+                className="btn btn-outline-light ms-2"
+            >
+                {loadingGetUsuarioById ? "Searching..." : "Search"}
+            </button>
+            
+        </form>
+
+        <div className="navbar-nav">
+            <div className="nav-item text-nowrap">
+                <a className="nav-link px-3">
+                    Sign out
+                </a>
+            </div>
+        </div>
+
+        <button
+            className="navbar-toggler d-md-none collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu"
+            aria-controls="sidebarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span className="navbar-toggler-icon"></span>
+        </button>
+
+    </header>
+</div>
 
                 <div className="dashboard-content row m-0 ">
 
@@ -136,7 +178,22 @@ function UsuariosDashboard() {
                                     <tbody className="users-table-body">
                                         {usuarios.map((usuario) => (
                                             <tr key={usuario.ID_Usuario}>
-                                                <td>{usuario.ID_Usuario}</td>
+                                                {/* Select checkbox */}
+                                                <td>
+                                                    <input
+                                                        className="form-check-input"
+                                                        type="checkbox"
+                                                        checked={selectedUsers.includes(usuario.ID_Usuario)}
+                                                        onChange={() => {
+                                                            setSelectedUsers((current) =>
+                                                                current.includes(usuario.ID_Usuario)
+                                                                    ? current.filter((id) => id !== usuario.ID_Usuario)
+                                                                    : [...current, usuario.ID_Usuario]
+                                                            );
+                                                        }}
+                                                        aria-label={`Select user ${usuario.ID_Usuario}`}
+                                                    />{usuario.ID_Usuario}
+                                                </td>
                                                 <td>{usuario.Nombre_Usuario}</td>
                                                 <td>{usuario.ID_Perfil}</td>
                                                 <td>{usuario.Credencial_Espacial}</td>

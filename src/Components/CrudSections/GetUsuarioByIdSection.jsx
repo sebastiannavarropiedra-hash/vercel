@@ -26,26 +26,50 @@ export function useGetUsuarioByIdSection() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (!userId) return;
 
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await getUsuarioById(userId);
-      const usuarioEncontrado = Array.isArray(data.datos) ? data.datos[0] : data.datos || data;
-      setUsuario(usuarioEncontrado || null);
-      if (!usuarioEncontrado) {
-        setError('Usuario no encontrado');
-      }
-    } catch (err) {
-      console.error(err);
-      setError("Failed to fetch user");
-      setUsuario(null);
-    }
-    setLoading(false);
-  };
+
+  const handleSearch = async (e) => {
+
+        e.preventDefault();
+
+        if (!userId) return null;
+
+        setLoading(true);
+        setError(null);
+
+        try {
+
+            const data = await getUsuarioById(userId);
+
+            const usuarioEncontrado =
+                Array.isArray(data.datos)
+                    ? data.datos[0]
+                    : data.datos || data;
+
+            setUsuario(usuarioEncontrado || null);
+
+            if (!usuarioEncontrado) {
+                setError("Usuario no encontrado");
+                return null;
+            }
+
+            return usuarioEncontrado;
+
+        } catch (err) {
+
+            console.error(err);
+
+            setError("Failed to fetch user");
+            setUsuario(null);
+
+            return null;
+
+        } finally {
+
+            setLoading(false);
+
+        }
+    };
 
   return { userId, setUserId, usuario, loading, error, handleSearch };
 }
