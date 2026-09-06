@@ -14,8 +14,8 @@ function UsuariosDashboard() {
     /* test api hook */
     const { testResult, loading: loadingTest, handleTest } = useTestApi();
     /* CRUD hooks */
-    const { usuarios = [], loading: loadingGetUsuarios, handleGetUsuarios, error: errorGetUsuarios, fetchData: fetchUsuarios } = useGetUsuariosSection();
-    const { userId, setUserId, usuario=[], loading: loadingGetUsuarioById, error: errorGetUsuarioById, handleSearch } = useGetUsuarioByIdSection();
+    const { usuarios = [], setUsuarios, loading: loadingGetUsuarios, handleGetUsuarios, error: errorGetUsuarios, fetchData: fetchUsuarios } = useGetUsuariosSection();
+    const { userId, setUserId, usuario = [], loading: loadingGetUsuarioById, error: errorGetUsuarioById, handleSearch } = useGetUsuarioByIdSection();
     const { result: resultPost, error: errorPost, formData: formDataPost, setFormData: setFormDataPost, handleChange: handleChangePost } = usePostUsuariosSection();
     const { formData: formDataPut, setFormData: setFormDataPut, result: resultPut, handleChange: handleChangePut } = usePutUpdateSection();
     const { userId: userIdDeleteLogico, setUserId: setUserIdDeleteLogico } = useDeleteLogicoSection();
@@ -58,7 +58,11 @@ function UsuariosDashboard() {
         return () => clearInterval(interval);
     }, [handleTest]);
 
-  
+    useEffect(() => {
+        if (usuario) {
+            setUsuarios([usuario]);
+        }
+    }, [usuario]);
 
     return (
 
@@ -67,70 +71,70 @@ function UsuariosDashboard() {
                 {loadingTest ? (
                     <span>Checking status...</span>
                 ) : testResult ? (
-                    <span>Base is online </span>
+                    <span>Base is online <i className="fa-solid fa-circle-dot"></i></span>
                 ) : (
-                    <span>Base is offline</span>
+                    <span>Base is offline <i className="fa-solid fa-spinner"></i></span>
                 )}
             </div>
             <div className="usuarios-dashboard">
                 <div className="dashboard-header">
-    <header className="navbar navbar-dark sticky-top bg-dark flex-nowrap shadow">
+                    <header className="navbar navbar-dark sticky-top bg-dark flex-nowrap shadow">
 
-        <a className="navbar-brand">
-            CRUD Users
-        </a>
+                        <a className="navbar-brand">
+                            CRUD Users
+                        </a>
 
-        <form
-            onSubmit={handleSearch}
-            className="d-flex w-100 mx-3"
-        >
-            <input
-                className="form-control form-control-dark"
-                type="number"
-                placeholder="Enter User ID"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
-                required
-                aria-label="Search user by ID"
-            />
+                        <form
+                            onSubmit={handleSearch}
+                            className="d-flex w-100 mx-3"
+                        >
+                            <input
+                                className="form-control form-control-dark"
+                                type="number"
+                                placeholder="Enter User ID"
+                                value={userId}
+                                onChange={(e) => setUserId(e.target.value)}
+                                required
+                                aria-label="Search user by ID"
+                            />
 
-            <button
-                type="submit"
-                disabled={loadingGetUsuarioById}
-                className="btn btn-outline-light ms-2"
-            >
-                {loadingGetUsuarioById ? "Searching..." : "Search"}
-            </button>
-            
-        </form>
+                            <button
+                                type="submit"
+                                disabled={loadingGetUsuarioById}
+                                className="btn btn-outline-light ms-2"
+                            >
+                                {loadingGetUsuarioById ? "Searching..." : "Search"}
+                            </button>
 
-        <div className="navbar-nav">
-            <div className="nav-item text-nowrap">
-                <a className="nav-link px-3">
-                    Sign out
-                </a>
-            </div>
-        </div>
+                        </form>
 
-        <button
-            className="navbar-toggler d-md-none collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#sidebarMenu"
-            aria-controls="sidebarMenu"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        >
-            <span className="navbar-toggler-icon"></span>
-        </button>
+                        <div className="navbar-nav">
+                            <div className="nav-item text-nowrap">
+                                <a className="nav-link px-3">
+                                    Sign out
+                                </a>
+                            </div>
+                        </div>
 
-    </header>
-</div>
+                        <button
+                            className="navbar-toggler d-md-none collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#sidebarMenu"
+                            aria-controls="sidebarMenu"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+
+                    </header>
+                </div>
 
                 <div className="dashboard-content row m-0 ">
 
                     {/* Sidebar */}
-                    <div className="dashboard-sidebar col-lg-2  p-0 collapse d-md-block " id="sidebarMenu">
+                    <div className="dashboard-sidebar col-lg-2 col-md-2 p-0 collapse d-md-block " id="sidebarMenu">
                         <div className="d-flex flex-column   bg-dark h-100 " >
 
 
@@ -140,12 +144,10 @@ function UsuariosDashboard() {
                                         Create
                                     </a>
                                 </li>
-                                <li><a className="nav-link text-white">Update</a>
-                                </li>
-                                <li><a className="nav-link text-white">Delete</a>
-                                </li>
-                                <li><a className="nav-link text-white">Reactivate</a>
-                                </li>
+                                <li><a className="nav-link text-white">Update</a></li>
+                                <li><a className="nav-link text-white">Archive</a></li>
+                                <li><a className="nav-link text-white">Reactivate</a></li>
+                                <li><a className="nav-link text-white">Delete</a></li>
 
                             </ul>
 
@@ -192,7 +194,7 @@ function UsuariosDashboard() {
                                                             );
                                                         }}
                                                         aria-label={`Select user ${usuario.ID_Usuario}`}
-                                                    />{usuario.ID_Usuario}
+                                                    /> {usuario.ID_Usuario}
                                                 </td>
                                                 <td>{usuario.Nombre_Usuario}</td>
                                                 <td>{usuario.ID_Perfil}</td>

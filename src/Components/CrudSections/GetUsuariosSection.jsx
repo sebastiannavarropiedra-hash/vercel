@@ -39,7 +39,7 @@ export function useGetUsuariosSection() {
     setLoading(false);
   };
 
-  return { usuarios, loading, error, fetchData };
+  return { usuarios, loading, error, fetchData,setUsuarios };
 }
 /* <section className="crud-section">
   <h2 className="section-title">-GET /usuarios-</h2>

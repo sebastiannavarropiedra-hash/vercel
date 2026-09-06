@@ -9,13 +9,21 @@
     background-color: #1e1e1e;
 }
 
+.usuarios-main i.fa-circle-dot {
+    color: #1aff2d;
+}
+
+.usuarios-main i.fa-spinner {
+    color: #ff7a1a;
+}
+
 .dashboard-content .dashboard-table {
 
     height: 50vh;
     overflow-y: auto;
 }
 
-.dashboard-sidebar{
+.dashboard-sidebar {
     border-right: #ff7a1a 2px solid;
 }
 
