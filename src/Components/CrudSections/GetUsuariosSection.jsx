@@ -16,9 +16,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { getUsuarios } from '../../services/apiService';
-import '../../Styles/GetUsuariosSection.css';
 
-function GetUsuariosSection() {
+export function useGetUsuariosSection() {
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -40,44 +39,47 @@ function GetUsuariosSection() {
     setLoading(false);
   };
 
-  return (
-    <section className="crud-section">
-      <h2 className="section-title">-GET /usuarios-</h2>
-      <p className="route-description">Retrieve all active users</p>
-      <button onClick={fetchData} disabled={loading} className="crud-btn">
-        {loading ? "Loading..." : "Refresh Users"}
-      </button>
-      
-      {error && <p className="error-message">{error}</p>}
-      
-      {usuarios.length > 0 && (
-        <div className="table-container">
-          <table className="users-table">
-            <thead>
-              <tr>
-                <th>ID usuario</th>
-                <th>Nombre</th>
-                <th>ID Perfil</th>
-                <th>Credencial</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody className="users-table-body">
-              {usuarios.map((usuario) => (
-                <tr key={usuario.ID_Usuario}>
-                  <td>{usuario.ID_Usuario}</td>
-                  <td>{usuario.Nombre_Usuario}</td>
-                  <td>{usuario.ID_Perfil}</td>
-                  <td>{usuario.Credencial_Espacial}</td>
-                  <td>{usuario.Estado ? "Activo" : "Inactivo"}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </section>
-  );
+  return { usuarios, loading, error, fetchData,setUsuarios };
 }
+/* <section className="crud-section">
+  <h2 className="section-title">-GET /usuarios-</h2>
+  <p className="route-description">Retrieve all active users</p>
+  <button onClick={fetchData} disabled={loading} className="crud-btn">
+    {loading ? "Loading..." : "Refresh Users"}
+  </button>
+  
+  {error && <p className="error-message">{error}</p>}
+  
+  {usuarios.length > 0 && (
+    <div className="table-container">
+      <table className="users-table">
+        <thead>
+          <tr>
+            <th>ID usuario</th>
+            <th>Nombre</th>
+            <th>ID Perfil</th>
+            <th>Credencial</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody className="users-table-body">
+          {usuarios.map((usuario) => (
+            <tr key={usuario.ID_Usuario}>
+              <td>{usuario.ID_Usuario}</td>
+              <td>{usuario.Nombre_Usuario}</td>
+              <td>{usuario.ID_Perfil}</td>
+              <td>{usuario.Credencial_Espacial}</td>
+              <td>{usuario.Estado ? "Activo" : "Inactivo"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</section> */
 
-export default GetUsuariosSection;
+
+
+export default function GetUsuariosSection() {
+  return null;
+}
