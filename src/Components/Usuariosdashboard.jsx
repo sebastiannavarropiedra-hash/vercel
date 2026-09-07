@@ -8,7 +8,6 @@ import { usePutUpdateSection } from "./CrudSections/PutUpdateSection";
 import { useDeleteLogicoSection } from "./CrudSections/DeleteLogicoSection";
 import { useDeleteFisicoSection } from "./CrudSections/DeleteFisicoSection";
 import { useReactivateUserSection } from "./CrudSections/ReactivateUserSection";
-import { crearUsuario, updateUsuario } from '../services/apiService';
 import '../Styles/Usuariosdashboard.css';
 
 function UsuariosDashboard() {
@@ -17,8 +16,8 @@ function UsuariosDashboard() {
     /* CRUD hooks */
     const { usuarios = [], setUsuarios, loading: loadingGetUsuarios, handleGetUsuarios, error: errorGetUsuarios, fetchData: fetchUsuarios } = useGetUsuariosSection();
     const { userId, setUserId, usuario = [], loading: loadingGetUsuarioById, error: errorGetUsuarioById, handleSearch } = useGetUsuarioByIdSection();
-    const { result: resultPost, error: errorPost, formData: formDataPost, setFormData: setFormDataPost, handleChange: handleChangePost } = usePostUsuariosSection();
-    const { formData: formDataPut, setFormData: setFormDataPut, result: resultPut, handleChange: handleChangePut } = usePutUpdateSection();
+    const { result: resultPost, error: errorPost, formData: formDataPost, setFormData: setFormDataPost, handleChange: handleChangePost, handleSubmit: handleSubmitPost } = usePostUsuariosSection();
+    const { formData: formDataPut, setFormData: setFormDataPut, result: resultPut, handleChange: handleChangePut, handleSubmit: handleSubmitPut } = usePutUpdateSection();
     const { userId: userIdDeleteLogico, setUserId: setUserIdDeleteLogico } = useDeleteLogicoSection();
     const { userId: userIdDeleteFisico, setUserId: setUserIdDeleteFisico } = useDeleteFisicoSection();
     const { result: resultReactivate, error: errorReactivate } = useReactivateUserSection();
@@ -37,10 +36,13 @@ function UsuariosDashboard() {
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [isFormOpen, setIsFormOpen] = useState(false);
 
-    const onCreate = (data) => crearUsuario(data);
-    const onUpdate = (data) => updateUsuario(data);
+    const onCreate = (data) => handleSubmitPost(data);
+    const onUpdate = (data) => handleSubmitPut(data);
 
-
+    const handleFormChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((p) => ({ ...p, [name]: value }));
+    };
     const openCreateForm = () => {
         setSelectedUsers([]);
         setFormData({ Nombre_Usuario: "", Credencial_Espacial: "", ID_Perfil: "" });
@@ -63,10 +65,7 @@ function UsuariosDashboard() {
     };
 
 
-    const handleFormChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((p) => ({ ...p, [name]: value }));
-    };
+
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -80,7 +79,6 @@ function UsuariosDashboard() {
             fetchUsuarios();
         } catch (err) {
             console.error(err);
-            // delegate error handling to parent; show simple alert for now
             alert("Failed to save user");
         }
     };
