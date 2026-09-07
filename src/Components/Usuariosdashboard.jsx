@@ -34,7 +34,41 @@ function UsuariosDashboard() {
     const [editingId, setEditingId] = useState(null);
     /* estado para manejar los usuarios seleccionados */
     const [selectedUsers, setSelectedUsers] = useState([]);
+    const [isFormOpen, setIsFormOpen] = useState(false);
 
+
+    const openCreateForm = () => {
+        setSelectedUsers([]);
+        setFormData({
+            Nombre_Usuario: "",
+            Credencial_Espacial: "",
+            ID_Perfil: ""
+        });
+        setIsFormOpen(true);
+    };
+
+
+    const handleFormChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((p) => ({ ...p, [name]: value }));
+    };
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            if (selectedUsers && selectedUsers.length > 0) {
+                await onUpdate(formData);
+            } else {
+                await onCreate(formData);
+            }
+            setIsFormOpen(false);
+            fetchUsuarios();
+        } catch (err) {
+            console.error(err);
+            // delegate error handling to parent; show simple alert for now
+            alert("Failed to save user");
+        }
+    };
 
 
     // useEffect(callback, dependencyArray) -> runs the callback after render, and again whenever a value in dependencyArray changes.
@@ -132,6 +166,43 @@ function UsuariosDashboard() {
                 </div>
 
                 <div className="dashboard-content row m-0 ">
+                    {isFormOpen && (
+                        <div className="modal">
+                            <div className="modal-content">
+                                <h3>{selectedUsers && selectedUsers.length > 0 ? "Editar Usuario" : "Crear Usuario"}</h3>
+                                <form onSubmit={handleFormSubmit}>
+                                    <input
+                                        name="Nombre_Usuario"
+                                        placeholder="Nombre Usuario"
+                                        value={formData.Nombre_Usuario || ""}
+                                        onChange={handleFormChange}
+                                        required
+                                    />
+                                    <input
+                                        name="Credencial_Espacial"
+                                        placeholder="Credencial Espacial"
+                                        value={formData.Credencial_Espacial || ""}
+                                        onChange={handleFormChange}
+                                        required
+                                    />
+                                    <input
+                                        name="ID_Perfil"
+                                        placeholder="ID Perfil"
+                                        type="number"
+                                        value={formData.ID_Perfil || ""}
+                                        onChange={handleFormChange}
+                                        required
+                                    />
+                                    <div className="modal-actions">
+                                        <button className="btn primary" type="submit">{selectedUsers ? "Guardar" : "Crear"}</button>
+                                        <button className="btn" type="button" onClick={() => setIsFormOpen(false)}>
+                                            Cancelar
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    )}
 
                     {/* Sidebar */}
                     <div className="dashboard-sidebar col-lg-2 col-md-2 p-0 collapse d-md-block " id="sidebarMenu">
@@ -140,9 +211,9 @@ function UsuariosDashboard() {
 
                             <ul className="nav nav-pills flex-column  ">
                                 <li>
-                                    <a className="nav-link-color active" aria-current="page">
+                                    <button className="nav-link text-white" onClick={openCreateForm}>
                                         Create <i className="fa-solid fa-plus"></i>
-                                    </a>
+                                    </button>
                                 </li>
 
                                 <li>
