@@ -36,8 +36,7 @@ function UsuariosDashboard() {
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [isFormOpen, setIsFormOpen] = useState(false);
 
-    const onCreate = (data) => handleSubmitPost(data);
-    const onUpdate = (data) => handleSubmitPut(data);
+   
 
     const handleFormChange = (e) => {
         const { name, value } = e.target;
@@ -71,9 +70,9 @@ function UsuariosDashboard() {
         e.preventDefault();
         try {
             if (selectedUsers && selectedUsers.length > 0) {
-                await onUpdate(formData);
+                await handleSubmitPut(formData);
             } else {
-                await onCreate(formData);
+                await handleSubmitPost(formData);
             }
             setIsFormOpen(false);
             fetchUsuarios();
@@ -317,7 +316,7 @@ function UsuariosDashboard() {
                         <div className="d-flex flex-column   bg-dark h-100 " >
 
 
-                            <ul className="nav nav-pills flex-column  ">
+                            <ul className="nav nav-pills flex-column align-items-center  ">
                                 <li>
                                     <button className="nav-link text-white" onClick={openCreateForm}>
                                         Create <i className="fa-solid fa-plus"></i>
