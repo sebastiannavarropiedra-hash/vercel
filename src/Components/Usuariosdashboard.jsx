@@ -8,6 +8,7 @@ import { usePutUpdateSection } from "./CrudSections/PutUpdateSection";
 import { useDeleteLogicoSection } from "./CrudSections/DeleteLogicoSection";
 import { useDeleteFisicoSection } from "./CrudSections/DeleteFisicoSection";
 import { useReactivateUserSection } from "./CrudSections/ReactivateUserSection";
+import { crearUsuario, updateUsuario } from '../services/apiService';
 import '../Styles/Usuariosdashboard.css';
 
 function UsuariosDashboard() {
@@ -36,15 +37,29 @@ function UsuariosDashboard() {
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [isFormOpen, setIsFormOpen] = useState(false);
 
+    const onCreate = (data) => crearUsuario(data);
+    const onUpdate = (data) => updateUsuario(data);
+
 
     const openCreateForm = () => {
         setSelectedUsers([]);
-        setFormData({
-            Nombre_Usuario: "",
-            Credencial_Espacial: "",
-            ID_Perfil: ""
-        });
+        setFormData({ Nombre_Usuario: "", Credencial_Espacial: "", ID_Perfil: "" });
         setIsFormOpen(true);
+    };
+
+    const handleUpdateClick = () => {
+        if (selectedUsers.length !== 1) {
+            alert("Please select exactly one user to update.");
+            return;
+        }
+
+        const selectedUser = usuarios.find(
+            (user) => user.ID_Usuario === selectedUsers[0]
+        );
+
+        if (selectedUser) {
+            openEditForm(selectedUser);
+        }
     };
 
 
@@ -70,6 +85,17 @@ function UsuariosDashboard() {
         }
     };
 
+
+    const openEditForm = (user) => {
+        setSelectedUsers([user.ID_Usuario]);
+        setFormData({
+            ID_Usuario: user.ID_Usuario,
+            Nombre_Usuario: user.Nombre_Usuario,
+            Credencial_Espacial: user.Credencial_Espacial,
+            ID_Perfil: user.ID_Perfil,
+        });
+        setIsFormOpen(true);
+    };
 
     // useEffect(callback, dependencyArray) -> runs the callback after render, and again whenever a value in dependencyArray changes.
     // () => { ... }                         -> arrow function passed as the effect callback (the code React will execute).
@@ -166,43 +192,127 @@ function UsuariosDashboard() {
                 </div>
 
                 <div className="dashboard-content row m-0 ">
+                    {/* Modal for creating/editing user */}
                     {isFormOpen && (
-                        <div className="modal">
-                            <div className="modal-content">
-                                <h3>{selectedUsers && selectedUsers.length > 0 ? "Editar Usuario" : "Crear Usuario"}</h3>
-                                <form onSubmit={handleFormSubmit}>
-                                    <input
-                                        name="Nombre_Usuario"
-                                        placeholder="Nombre Usuario"
-                                        value={formData.Nombre_Usuario || ""}
-                                        onChange={handleFormChange}
-                                        required
-                                    />
-                                    <input
-                                        name="Credencial_Espacial"
-                                        placeholder="Credencial Espacial"
-                                        value={formData.Credencial_Espacial || ""}
-                                        onChange={handleFormChange}
-                                        required
-                                    />
-                                    <input
-                                        name="ID_Perfil"
-                                        placeholder="ID Perfil"
-                                        type="number"
-                                        value={formData.ID_Perfil || ""}
-                                        onChange={handleFormChange}
-                                        required
-                                    />
-                                    <div className="modal-actions">
-                                        <button className="btn primary" type="submit">{selectedUsers ? "Guardar" : "Crear"}</button>
-                                        <button className="btn" type="button" onClick={() => setIsFormOpen(false)}>
-                                            Cancelar
-                                        </button>
+                        <div
+                            className="modal fade show d-block"
+                            tabIndex="-1"
+                            role="dialog"
+                            aria-modal="true"
+                        >
+                            <div className="modal-dialog modal-dialog-centered">
+                                <div className="modal-content">
+
+                                    {/* Header */}
+                                    <div className="modal-header">
+                                        <h5 className="modal-title">
+                                            {selectedUsers && selectedUsers.length > 0
+                                                ? "Editar Usuario"
+                                                : "Crear Usuario"}
+                                        </h5>
+
+                                        <button
+                                            type="button"
+                                            className="btn-close"
+                                            onClick={() => setIsFormOpen(false)}
+                                            aria-label="Close"
+                                        ></button>
                                     </div>
-                                </form>
+
+                                    {/* Body */}
+                                    <div className="modal-body">
+                                        <form onSubmit={handleFormSubmit}>
+
+                                            <div className="mb-3">
+                                                <label
+                                                    htmlFor="Nombre_Usuario"
+                                                    className="form-label"
+                                                >
+                                                    Nombre Usuario
+                                                </label>
+
+                                                <input
+                                                    id="Nombre_Usuario"
+                                                    name="Nombre_Usuario"
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Nombre Usuario"
+                                                    value={formData.Nombre_Usuario || ""}
+                                                    onChange={handleFormChange}
+                                                    required
+                                                />
+                                            </div>
+
+                                            <div className="mb-3">
+                                                <label
+                                                    htmlFor="Credencial_Espacial"
+                                                    className="form-label"
+                                                >
+                                                    Credencial Espacial
+                                                </label>
+
+                                                <input
+                                                    id="Credencial_Espacial"
+                                                    name="Credencial_Espacial"
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Credencial Espacial"
+                                                    value={formData.Credencial_Espacial || ""}
+                                                    onChange={handleFormChange}
+                                                    required
+                                                />
+                                            </div>
+
+                                            <div className="mb-3">
+                                                <label
+                                                    htmlFor="ID_Perfil"
+                                                    className="form-label"
+                                                >
+                                                    ID Perfil
+                                                </label>
+
+                                                <input
+                                                    id="ID_Perfil"
+                                                    name="ID_Perfil"
+                                                    type="number"
+                                                    className="form-control"
+                                                    placeholder="ID Perfil"
+                                                    value={formData.ID_Perfil || ""}
+                                                    onChange={handleFormChange}
+                                                    required
+                                                />
+                                            </div>
+
+                                            {/* Footer */}
+                                            <div className="modal-footer px-0 pb-0">
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-secondary"
+                                                    onClick={() => setIsFormOpen(false)}
+                                                >
+                                                    Cancelar
+                                                </button>
+
+                                                <button
+                                                    type="submit"
+                                                    className="btn btn-primary"
+                                                >
+                                                    {selectedUsers && selectedUsers.length > 0
+                                                        ? "Guardar"
+                                                        : "Crear"}
+                                                </button>
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     )}
+
+
+
 
                     {/* Sidebar */}
                     <div className="dashboard-sidebar col-lg-2 col-md-2 p-0 collapse d-md-block " id="sidebarMenu">
@@ -217,9 +327,9 @@ function UsuariosDashboard() {
                                 </li>
 
                                 <li>
-                                    <a className="nav-link text-white">
+                                    <button className="nav-link text-white" onClick={handleUpdateClick}>
                                         Update <i className="fa-solid fa-pen"></i>
-                                    </a>
+                                    </button>
                                 </li>
 
                                 <li>
