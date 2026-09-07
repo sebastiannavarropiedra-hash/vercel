@@ -139,15 +139,36 @@ function UsuariosDashboard() {
 
 
                             <ul className="nav nav-pills flex-column  ">
-                                <li className="nav-item">
+                                <li>
                                     <a className="nav-link-color active" aria-current="page">
-                                        Create
+                                        Create <i className="fa-solid fa-plus"></i>
                                     </a>
                                 </li>
-                                <li><a className="nav-link text-white">Update</a></li>
-                                <li><a className="nav-link text-white">Archive</a></li>
-                                <li><a className="nav-link text-white">Reactivate</a></li>
-                                <li><a className="nav-link text-white">Delete</a></li>
+
+                                <li>
+                                    <a className="nav-link text-white">
+                                        Update <i className="fa-solid fa-pen"></i>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a className="nav-link text-white">
+                                        Archive <i className="fa-solid fa-box-archive"></i>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a className="nav-link text-white">
+                                        Reactivate <i className="fa-solid fa-rotate-right"></i>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a className="nav-link text-white">
+                                        Delete <i className="fa-solid fa-trash"></i>
+                                    </a>
+                                </li>
+
 
                             </ul>
 
