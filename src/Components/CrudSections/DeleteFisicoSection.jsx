@@ -31,9 +31,13 @@ export function useDeleteFisicoSection() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
 
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    if (!userId) return;
+  const handleDelete = async (eventOrUserId) => {
+    if (typeof eventOrUserId?.preventDefault === 'function') {
+      eventOrUserId.preventDefault();
+    }
+
+    const id = typeof eventOrUserId === 'object' ? userId : eventOrUserId;
+    if (!id) return;
 
     if (!window.confirm('WARNING: This will permanently delete the user from the database. you could lose your job')) {
       return;
@@ -41,7 +45,7 @@ export function useDeleteFisicoSection() {
 
     setLoading(true);
     try {
-      const data = await deleteFisico(userId);
+      const data = await deleteFisico(id);
       setResult(data);
       setUserId('');
     } catch (error) {

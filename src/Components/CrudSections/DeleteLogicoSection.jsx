@@ -30,15 +30,19 @@ export function useDeleteLogicoSection() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
 
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    if (!userId) return;
+  const handleDelete = async (eventOrUserId) => {
+    if (typeof eventOrUserId?.preventDefault === 'function') {
+      eventOrUserId.preventDefault();
+    }
+
+    const id = typeof eventOrUserId === 'object' ? userId : eventOrUserId;
+    if (!id) return;
 
     if (!window.confirm('Are you sure you want to mark this user as inactive(Wont appear on active users list)?')) return;
 
     setLoading(true);
     try {
-      const data = await deleteLogico(userId);
+      const data = await deleteLogico(id);
       setResult(data);
       setUserId('');
     } catch (error) {

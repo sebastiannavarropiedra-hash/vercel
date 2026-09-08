@@ -18,9 +18,9 @@ function UsuariosDashboard() {
     const { userId, setUserId, usuario = [], loading: loadingGetUsuarioById, error: errorGetUsuarioById, handleSearch } = useGetUsuarioByIdSection();
     const { result: resultPost, error: errorPost, formData: formDataPost, setFormData: setFormDataPost, handleChange: handleChangePost, handleSubmit: handleSubmitPost } = usePostUsuariosSection();
     const { formData: formDataPut, setFormData: setFormDataPut, result: resultPut, handleChange: handleChangePut, handleSubmit: handleSubmitPut } = usePutUpdateSection();
-    const { userId: userIdDeleteLogico, setUserId: setUserIdDeleteLogico } = useDeleteLogicoSection();
-    const { userId: userIdDeleteFisico, setUserId: setUserIdDeleteFisico } = useDeleteFisicoSection();
-    const { result: resultReactivate, error: errorReactivate } = useReactivateUserSection();
+    const { userId: userIdDeleteLogico, setUserId: setUserIdDeleteLogico, handleDelete: handleDeleteLogico } = useDeleteLogicoSection();
+    const { userId: userIdDeleteFisico, setUserId: setUserIdDeleteFisico, handleDelete: handleDeleteFisico } = useDeleteFisicoSection();
+    const { result: resultReactivate, error: errorReactivate, handleReactivate: handleReactivateUser } = useReactivateUserSection();
 
 
     /* estado para manejar la vista actual */
@@ -36,18 +36,15 @@ function UsuariosDashboard() {
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [isFormOpen, setIsFormOpen] = useState(false);
 
-   
 
-    const handleFormChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((p) => ({ ...p, [name]: value }));
-    };
+
+
     const openCreateForm = () => {
         setSelectedUsers([]);
         setFormData({ Nombre_Usuario: "", Credencial_Espacial: "", ID_Perfil: "" });
         setIsFormOpen(true);
     };
-
+    /* OR */
     const handleUpdateClick = () => {
         if (selectedUsers.length !== 1) {
             alert("Please select exactly one user to update.");
@@ -63,9 +60,26 @@ function UsuariosDashboard() {
         }
     };
 
+    /* ↓ */
+    const openEditForm = (user) => {
+        setSelectedUsers([user.ID_Usuario]);
+        setFormData({
+            ID_Usuario: user.ID_Usuario,
+            Nombre_Usuario: user.Nombre_Usuario,
+            Credencial_Espacial: user.Credencial_Espacial,
+            ID_Perfil: user.ID_Perfil,
+        });
+        setIsFormOpen(true);
+    };
 
+    /* ↓ */
 
+    const handleFormChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((p) => ({ ...p, [name]: value }));
+    };
 
+    /* ↓ */
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -76,6 +90,7 @@ function UsuariosDashboard() {
             }
             setIsFormOpen(false);
             fetchUsuarios();
+            /* cerrar formulario y refrescar lista de usuarios */
         } catch (err) {
             console.error(err);
             alert("Failed to save user");
@@ -83,15 +98,54 @@ function UsuariosDashboard() {
     };
 
 
-    const openEditForm = (user) => {
-        setSelectedUsers([user.ID_Usuario]);
-        setFormData({
-            ID_Usuario: user.ID_Usuario,
-            Nombre_Usuario: user.Nombre_Usuario,
-            Credencial_Espacial: user.Credencial_Espacial,
-            ID_Perfil: user.ID_Perfil,
-        });
-        setIsFormOpen(true);
+
+
+
+    const handleDeactivateClick = () => {
+        if (selectedUsers.length !== 1) {
+            alert("Please select exactly one user to deactivate.");
+            return;
+        }
+
+        const selectedUser = usuarios.find(
+            (user) => user.ID_Usuario === selectedUsers[0]
+        );
+
+        if (selectedUser) {
+            handleDeleteLogico(selectedUser.ID_Usuario)
+                .then(fetchUsuarios)
+                .then(()=>{setSelectedUsers([]);}) // Clear selection after deactivation
+        }
+    };
+
+    const handleReactivateClick = () => {
+        if (selectedUsers.length !== 1) {
+            alert("Please select exactly one user to reactivate.");
+            return;
+        }
+
+        const selectedUser = usuarios.find(
+            (user) => user.ID_Usuario === selectedUsers[0]
+        );
+
+        if (selectedUser) {
+            handleReactivateUser(selectedUser.ID_Usuario).then(fetchUsuarios).then(()=>{setSelectedUsers([]);}) // Clear selection after reactivation
+        }
+    };
+
+    const handleDeleteClick = () => {
+        if (selectedUsers.length !== 1) {
+            alert("Please select exactly one user to delete.");
+            return;
+        }
+
+        const selectedUser = usuarios.find(
+            (user) => user.ID_Usuario === selectedUsers[0]
+        );
+
+        if (selectedUser) {
+            handleDeleteFisico(selectedUser.ID_Usuario).then(fetchUsuarios).then(()=>{setSelectedUsers([]);}); // Clear selection after deletion
+        }
     };
 
     // useEffect(callback, dependencyArray) -> runs the callback after render, and again whenever a value in dependencyArray changes.
@@ -330,21 +384,21 @@ function UsuariosDashboard() {
                                 </li>
 
                                 <li>
-                                    <a className="nav-link text-white">
-                                        Archive <i className="fa-solid fa-box-archive"></i>
-                                    </a>
+                                    <button className="nav-link text-white" onClick={handleDeactivateClick}>
+                                        Deactivate <i className="fa-solid fa-ban"></i>
+                                    </button>
                                 </li>
 
                                 <li>
-                                    <a className="nav-link text-white">
+                                    <button className="nav-link text-white" onClick={handleReactivateClick}>
                                         Reactivate <i className="fa-solid fa-rotate-right"></i>
-                                    </a>
+                                    </button>
                                 </li>
 
                                 <li>
-                                    <a className="nav-link text-white">
+                                    <button className="nav-link text-white" onClick={handleDeleteClick}>
                                         Delete <i className="fa-solid fa-trash"></i>
-                                    </a>
+                                    </button>
                                 </li>
 
 
