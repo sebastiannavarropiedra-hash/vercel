@@ -177,12 +177,9 @@ function UsuariosDashboard() {
         }
     }, [usuario]);
 
-    console.log(
-    usuarios.map((u) => ({
-        id: u.ID_Usuario,
-        estado: u.Estado
-    }))
-);
+    
+    
+
 
 
     return (
