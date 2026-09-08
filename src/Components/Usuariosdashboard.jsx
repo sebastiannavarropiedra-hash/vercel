@@ -177,8 +177,8 @@ function UsuariosDashboard() {
         }
     }, [usuario]);
 
-    
-    
+
+
 
 
 
@@ -418,11 +418,11 @@ function UsuariosDashboard() {
 
                     {/* Main content */}
                     <div className="dashboard-table col p-0 bg-dark">
+                        <div className="stats align-items-center d-flex justify-content-between p-2">
+                            <button onClick={fetchUsuarios} disabled={loadingGetUsuarios} className="crud-btn">
+                                {loadingGetUsuarios ? "Loading..." : "Refresh Users"}
+                            </button>
 
-                        <button onClick={fetchUsuarios} disabled={loadingGetUsuarios} className="crud-btn">
-                            {loadingGetUsuarios ? "Loading..." : "Refresh Users"}
-                        </button>
-                        <div className="stats-row">
                             <div className="stat-card">Total: {total}</div>
                             <div className="stat-card">Activos: {active}</div>
                             <div className="stat-card">Inactivos: {inactive}</div>
