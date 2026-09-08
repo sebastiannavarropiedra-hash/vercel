@@ -36,7 +36,9 @@ function UsuariosDashboard() {
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [isFormOpen, setIsFormOpen] = useState(false);
 
-
+    const total = (usuarios || []).length;
+    const active = (usuarios || []).filter((u) => u.Estado).length;
+    const inactive = total - active;
 
 
     const openCreateForm = () => {
@@ -114,7 +116,7 @@ function UsuariosDashboard() {
         if (selectedUser) {
             handleDeleteLogico(selectedUser.ID_Usuario)
                 .then(fetchUsuarios)
-                .then(()=>{setSelectedUsers([]);}) // Clear selection after deactivation
+                .then(() => { setSelectedUsers([]); }) // Clear selection after deactivation
         }
     };
 
@@ -129,7 +131,7 @@ function UsuariosDashboard() {
         );
 
         if (selectedUser) {
-            handleReactivateUser(selectedUser.ID_Usuario).then(fetchUsuarios).then(()=>{setSelectedUsers([]);}) // Clear selection after reactivation
+            handleReactivateUser(selectedUser.ID_Usuario).then(fetchUsuarios).then(() => { setSelectedUsers([]); }) // Clear selection after reactivation
         }
     };
 
@@ -144,7 +146,7 @@ function UsuariosDashboard() {
         );
 
         if (selectedUser) {
-            handleDeleteFisico(selectedUser.ID_Usuario).then(fetchUsuarios).then(()=>{setSelectedUsers([]);}); // Clear selection after deletion
+            handleDeleteFisico(selectedUser.ID_Usuario).then(fetchUsuarios).then(() => { setSelectedUsers([]); }); // Clear selection after deletion
         }
     };
 
@@ -174,6 +176,14 @@ function UsuariosDashboard() {
             setUsuarios([usuario]);
         }
     }, [usuario]);
+
+    console.log(
+    usuarios.map((u) => ({
+        id: u.ID_Usuario,
+        estado: u.Estado
+    }))
+);
+
 
     return (
 
@@ -415,6 +425,11 @@ function UsuariosDashboard() {
                         <button onClick={fetchUsuarios} disabled={loadingGetUsuarios} className="crud-btn">
                             {loadingGetUsuarios ? "Loading..." : "Refresh Users"}
                         </button>
+                        <div className="stats-row">
+                            <div className="stat-card">Total: {total}</div>
+                            <div className="stat-card">Activos: {active}</div>
+                            <div className="stat-card">Inactivos: {inactive}</div>
+                        </div>
 
                         {errorGetUsuarios && <p className="error-message">{errorGetUsuarios}</p>}
 
