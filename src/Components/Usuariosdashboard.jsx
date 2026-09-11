@@ -448,11 +448,11 @@ function UsuariosDashboard() {
                         <div className="dashboard-table col p-0 bg-dark">
                             <Tabs
                                 id='usuarios-main2'
-                                className='Dashboard-tabs col p-0 bg-dark'
+                                className='Dashboard-tabs '
                                 defaultActiveKey="TablaActiva"
                             >
                                 <Tab eventKey="TablaActiva" title="Usuarios activos">
-                                    <div className="dashboard-table col p-0 bg-dark">
+                                    <div className="dashboard-table">
                                         <div className="stats align-items-center d-flex justify-content-between p-2">
                                             <button onClick={fetchUsuarios} disabled={loadingGetUsuarios} className="crud-btn">
                                                 {loadingGetUsuarios ? "Loading..." : "Refresh Users"}
