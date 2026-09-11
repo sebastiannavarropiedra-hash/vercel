@@ -199,12 +199,12 @@ function UsuariosDashboard() {
                     <header className="navbar navbar-dark sticky-top bg-dark flex-nowrap shadow">
 
                         <a className="navbar-brand">
-                            CRUD Users
+                            <i className="fa-solid fa-person-circle-plus" ></i>
                         </a>
 
                         <form
                             onSubmit={handleSearch}
-                            className="d-flex w-100 mx-3"
+                            className="d-flex w-100 "
                         >
                             <input
                                 className="form-control form-control-dark"

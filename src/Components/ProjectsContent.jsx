@@ -9,9 +9,8 @@ function ProjectsContent() {
     return (
         <div className="dashboard-container container-fluid">
             <h1 className="dashboard-title">{INFO.projects[0].title}</h1>
-        
+        <UsuariosDashboard />
             <div className="crud-sections-container">
-                <UsuariosDashboard/>
             </div>
         </div>
     );

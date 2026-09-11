@@ -65,3 +65,10 @@
 
     background: #1c1c1c;
 }
+.dashboard-header .navbar{
+    justify-content: space-evenly;
+    align-items: center;
+}
+.dashboard-header  .navbar-brand{
+  margin:1%;
+}
