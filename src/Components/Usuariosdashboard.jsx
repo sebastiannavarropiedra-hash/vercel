@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import INFO from '../Data/user';
 import { useTestApi } from "./CrudSections/TestSection";
 import { useGetUsuariosSection } from "./CrudSections/GetUsuariosSection";
@@ -183,8 +185,8 @@ function UsuariosDashboard() {
 
 
     return (
-
-        <div className="usuarios-main">
+        <>
+            <div className="usuarios-main">
             <div>
                 {loadingTest ? (
                     <span>Checking status...</span>
@@ -477,6 +479,26 @@ function UsuariosDashboard() {
 
             </div>
         </div >
+
+        <Tabs
+            id='usuarios-main2'
+            className='mt-4 text-black p-3'
+            defaultActiveKey="TablaActiva"
+        >
+            <Tab eventKey="TablaActiva" title="Usuarios activos">
+                <div className="p-3">
+                    <h2>Usuarios activos</h2>
+                    <p>Aquí puedes agregar la tabla de usuarios activos.</p>
+                </div>
+            </Tab>
+            <Tab eventKey="TablaInactiva" title="Usuarios inactivos">
+                <div className="p-3">
+                    <h2>Usuarios inactivos</h2>
+                    <p>Aquí puedes agregar la tabla de usuarios inactivos.</p>
+                </div>
+            </Tab>
+            </Tabs>
+        </>
     );
 }
 
