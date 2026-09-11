@@ -92,7 +92,7 @@ const INFO = {
 
 	projects: [
 		{
-			title: "Backend API Dashboard - CRUD Usuarios",
+			title: "User Management Dashboard",
 			description:
 				"This full-stack project showcases a complete CRUD system with React handling the interactive frontend and Node.js / Express powering the backend API.It features user management with soft delete functionality, comprehensive data validation, and an intuitive dashboard for testing all API endpoints.The application is deployed across multiple platforms: Vercel for the frontend(no login required for demo), Render.com for the backend API, and Supabase.com for the PostgreSQL database. ",
 			logo: "https://cdn.jsdelivr.net/npm/programming-languages-logos/src/javascript/javascript.png",

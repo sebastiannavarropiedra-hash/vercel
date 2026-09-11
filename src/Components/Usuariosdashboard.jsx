@@ -43,6 +43,31 @@ function UsuariosDashboard() {
     const inactive = total - active;
 
 
+    const sortByUserId = (firstUser, secondUser) => (
+        Number(firstUser.ID_Usuario) - Number(secondUser.ID_Usuario)
+    );
+    const activeUsers = usuarios
+        .filter((usuario) => usuario.Estado)
+        .sort(sortByUserId);
+    const inactiveUsers = usuarios
+        .filter((usuario) => !usuario.Estado)
+        .sort(sortByUserId);
+    /* estado para manejar la paginación */
+    const usersPerPage = 50;
+    const [activePage, setActivePage] = useState(1);
+    const [inactivePage, setInactivePage] = useState(1);
+    const activePageCount = Math.max(1, Math.ceil(activeUsers.length / usersPerPage));
+    const inactivePageCount = Math.max(1, Math.ceil(inactiveUsers.length / usersPerPage));
+    const currentActivePage = Math.min(activePage, activePageCount);
+    const currentInactivePage = Math.min(inactivePage, inactivePageCount);
+    const visibleActiveUsers = activeUsers.slice(
+        (currentActivePage - 1) * usersPerPage,
+        currentActivePage * usersPerPage
+    );
+    const visibleInactiveUsers = inactiveUsers.slice(
+        (currentInactivePage - 1) * usersPerPage,
+        currentInactivePage * usersPerPage
+    );
     const openCreateForm = () => {
         setSelectedUsers([]);
         setFormData({ Nombre_Usuario: "", Credencial_Espacial: "", ID_Perfil: "" });
@@ -187,317 +212,408 @@ function UsuariosDashboard() {
     return (
         <>
             <div className="usuarios-main">
-            <div>
-                {loadingTest ? (
-                    <span>Checking status...</span>
-                ) : testResult ? (
-                    <span>Base is online <i className="fa-solid fa-circle-dot"></i></span>
-                ) : (
-                    <span>Base is offline <i className="fa-solid fa-spinner"></i></span>
-                )}
-            </div>
-            <div className="usuarios-dashboard">
-                <div className="dashboard-header">
-                    <header className="navbar navbar-dark sticky-top bg-dark flex-nowrap shadow">
-
-                        <a className="navbar-brand">
-                            <i className="fa-solid fa-person-circle-plus" ></i>
-                        </a>
-
-                        <form
-                            onSubmit={handleSearch}
-                            className="d-flex w-100 "
-                        >
-                            <input
-                                className="form-control form-control-dark"
-                                type="number"
-                                placeholder="Enter User ID"
-                                value={userId}
-                                onChange={(e) => setUserId(e.target.value)}
-                                required
-                                aria-label="Search user by ID"
-                            />
-
-                            <button
-                                type="submit"
-                                disabled={loadingGetUsuarioById}
-                                className="btn btn-outline-light ms-2"
-                            >
-                                {loadingGetUsuarioById ? "Searching..." : "Search"}
-                            </button>
-
-                        </form>
-
-                        <div className="navbar-nav">
-                            <div className="nav-item text-nowrap">
-                                <a className="nav-link px-3">
-                                    Sign out
-                                </a>
-                            </div>
-                        </div>
-
-                        <button
-                            className="navbar-toggler d-md-none collapsed"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#sidebarMenu"
-                            aria-controls="sidebarMenu"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                        >
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-
-                    </header>
+                <div>
+                    {loadingTest ? (
+                        <span>Checking status...</span>
+                    ) : testResult ? (
+                        <span>Base is online <i className="fa-solid fa-circle-dot"></i></span>
+                    ) : (
+                        <span>Base is offline <i className="fa-solid fa-spinner"></i></span>
+                    )}
                 </div>
+                <div className="usuarios-dashboard">
+                    <div className="dashboard-header">
+                        <header className="navbar navbar-dark sticky-top bg-dark flex-nowrap shadow">
 
-                <div className="dashboard-content row m-0 ">
-                    {/* Modal for creating/editing user */}
-                    {isFormOpen && (
-                        <div
-                            className="modal fade show d-block"
-                            tabIndex="-1"
-                            role="dialog"
-                            aria-modal="true"
-                        >
-                            <div className="modal-dialog modal-dialog-centered">
-                                <div className="modal-content">
+                            <a className="navbar-brand">
+                                <i className="fa-solid fa-person-circle-plus" ></i>
+                            </a>
 
-                                    {/* Header */}
-                                    <div className="modal-header">
-                                        <h5 className="modal-title">
-                                            {selectedUsers && selectedUsers.length > 0
-                                                ? "Editar Usuario"
-                                                : "Crear Usuario"}
-                                        </h5>
+                            <form
+                                onSubmit={handleSearch}
+                                className="d-flex w-100 "
+                            >
+                                <input
+                                    className="form-control form-control-dark"
+                                    type="number"
+                                    placeholder="Enter User ID"
+                                    value={userId}
+                                    onChange={(e) => setUserId(e.target.value)}
+                                    required
+                                    aria-label="Search user by ID"
+                                />
 
-                                        <button
-                                            type="button"
-                                            className="btn-close"
-                                            onClick={() => setIsFormOpen(false)}
-                                            aria-label="Close"
-                                        ></button>
-                                    </div>
+                                <button
+                                    type="submit"
+                                    disabled={loadingGetUsuarioById}
+                                    className="btn btn-outline-light ms-2"
+                                >
+                                    {loadingGetUsuarioById ? "Searching..." : "Search"}
+                                </button>
 
-                                    {/* Body */}
-                                    <div className="modal-body">
-                                        <form onSubmit={handleFormSubmit}>
+                            </form>
 
-                                            <div className="mb-3">
-                                                <label
-                                                    htmlFor="Nombre_Usuario"
-                                                    className="form-label"
-                                                >
-                                                    Nombre Usuario
-                                                </label>
-
-                                                <input
-                                                    id="Nombre_Usuario"
-                                                    name="Nombre_Usuario"
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Nombre Usuario"
-                                                    value={formData.Nombre_Usuario || ""}
-                                                    onChange={handleFormChange}
-                                                    required
-                                                />
-                                            </div>
-
-                                            <div className="mb-3">
-                                                <label
-                                                    htmlFor="Credencial_Espacial"
-                                                    className="form-label"
-                                                >
-                                                    Credencial Espacial
-                                                </label>
-
-                                                <input
-                                                    id="Credencial_Espacial"
-                                                    name="Credencial_Espacial"
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Credencial Espacial"
-                                                    value={formData.Credencial_Espacial || ""}
-                                                    onChange={handleFormChange}
-                                                    required
-                                                />
-                                            </div>
-
-                                            <div className="mb-3">
-                                                <label
-                                                    htmlFor="ID_Perfil"
-                                                    className="form-label"
-                                                >
-                                                    ID Perfil
-                                                </label>
-
-                                                <input
-                                                    id="ID_Perfil"
-                                                    name="ID_Perfil"
-                                                    type="number"
-                                                    className="form-control"
-                                                    placeholder="ID Perfil"
-                                                    value={formData.ID_Perfil || ""}
-                                                    onChange={handleFormChange}
-                                                    required
-                                                />
-                                            </div>
-
-                                            {/* Footer */}
-                                            <div className="modal-footer px-0 pb-0">
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-secondary"
-                                                    onClick={() => setIsFormOpen(false)}
-                                                >
-                                                    Cancelar
-                                                </button>
-
-                                                <button
-                                                    type="submit"
-                                                    className="btn btn-primary"
-                                                >
-                                                    {selectedUsers && selectedUsers.length > 0
-                                                        ? "Guardar"
-                                                        : "Crear"}
-                                                </button>
-                                            </div>
-
-                                        </form>
-                                    </div>
-
+                            <div className="navbar-nav">
+                                <div className="nav-item text-nowrap">
+                                    <a className="nav-link px-3">
+                                        Sign out
+                                    </a>
                                 </div>
                             </div>
-                        </div>
-                    )}
 
-
-
-
-                    {/* Sidebar */}
-                    <div className="dashboard-sidebar col-lg-2 col-md-2 p-0 collapse d-md-block " id="sidebarMenu">
-                        <div className="d-flex flex-column   bg-dark h-100 " >
-
-
-                            <ul className="nav nav-pills flex-column align-items-center  ">
-                                <li>
-                                    <button className="nav-link text-white" onClick={openCreateForm}>
-                                        Create <i className="fa-solid fa-plus"></i>
-                                    </button>
-                                </li>
-
-                                <li>
-                                    <button className="nav-link text-white" onClick={handleUpdateClick}>
-                                        Update <i className="fa-solid fa-pen"></i>
-                                    </button>
-                                </li>
-
-                                <li>
-                                    <button className="nav-link text-white" onClick={handleDeactivateClick}>
-                                        Deactivate <i className="fa-solid fa-ban"></i>
-                                    </button>
-                                </li>
-
-                                <li>
-                                    <button className="nav-link text-white" onClick={handleReactivateClick}>
-                                        Reactivate <i className="fa-solid fa-rotate-right"></i>
-                                    </button>
-                                </li>
-
-                                <li>
-                                    <button className="nav-link text-white" onClick={handleDeleteClick}>
-                                        Delete <i className="fa-solid fa-trash"></i>
-                                    </button>
-                                </li>
-
-
-                            </ul>
-
-
-                        </div>
-                    </div>
-
-
-                    {/* Main content */}
-                    <div className="dashboard-table col p-0 bg-dark">
-                        <div className="stats align-items-center d-flex justify-content-between p-2">
-                            <button onClick={fetchUsuarios} disabled={loadingGetUsuarios} className="crud-btn">
-                                {loadingGetUsuarios ? "Loading..." : "Refresh Users"}
+                            <button
+                                className="navbar-toggler d-md-none collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#sidebarMenu"
+                                aria-controls="sidebarMenu"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation"
+                            >
+                                <span className="navbar-toggler-icon"></span>
                             </button>
 
-                            <div className="stat-card">Total: {total}</div>
-                            <div className="stat-card">Activos: {active}</div>
-                            <div className="stat-card">Inactivos: {inactive}</div>
-                        </div>
+                        </header>
+                    </div>
 
-                        {errorGetUsuarios && <p className="error-message">{errorGetUsuarios}</p>}
+                    <div className="dashboard-content row m-0 ">
+                        {/* Modal for creating/editing user */}
+                        {isFormOpen && (
+                            <div
+                                className="modal fade show d-block"
+                                tabIndex="-1"
+                                role="dialog"
+                                aria-modal="true"
+                            >
+                                <div className="modal-dialog modal-dialog-centered">
+                                    <div className="modal-content">
 
-                        {usuarios.length > 0 && (
-                            <div className="table-container">
-                                <table className="users-table">
-                                    <thead>
-                                        <tr>
-                                            <th>ID usuario</th>
-                                            <th>Nombre</th>
-                                            <th>ID Perfil</th>
-                                            <th>Credencial</th>
-                                            <th>Estado</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="users-table-body">
-                                        {usuarios.map((usuario) => (
-                                            <tr key={usuario.ID_Usuario}>
-                                                {/* Select checkbox */}
-                                                <td>
+                                        {/* Header */}
+                                        <div className="modal-header">
+                                            <h5 className="modal-title">
+                                                {selectedUsers && selectedUsers.length > 0
+                                                    ? "Editar Usuario"
+                                                    : "Crear Usuario"}
+                                            </h5>
+
+                                            <button
+                                                type="button"
+                                                className="btn-close"
+                                                onClick={() => setIsFormOpen(false)}
+                                                aria-label="Close"
+                                            ></button>
+                                        </div>
+
+                                        {/* Body */}
+                                        <div className="modal-body">
+                                            <form onSubmit={handleFormSubmit}>
+
+                                                <div className="mb-3">
+                                                    <label
+                                                        htmlFor="Nombre_Usuario"
+                                                        className="form-label"
+                                                    >
+                                                        Nombre Usuario
+                                                    </label>
+
                                                     <input
-                                                        className="form-check-input"
-                                                        type="checkbox"
-                                                        checked={selectedUsers.includes(usuario.ID_Usuario)}
-                                                        onChange={() => {
-                                                            setSelectedUsers((current) =>
-                                                                current.includes(usuario.ID_Usuario)
-                                                                    ? current.filter((id) => id !== usuario.ID_Usuario)
-                                                                    : [...current, usuario.ID_Usuario]
-                                                            );
-                                                        }}
-                                                        aria-label={`Select user ${usuario.ID_Usuario}`}
-                                                    /> {usuario.ID_Usuario}
-                                                </td>
-                                                <td>{usuario.Nombre_Usuario}</td>
-                                                <td>{usuario.ID_Perfil}</td>
-                                                <td>{usuario.Credencial_Espacial}</td>
-                                                <td>{usuario.Estado ? "Activo" : "Inactivo"}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                                        id="Nombre_Usuario"
+                                                        name="Nombre_Usuario"
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Nombre Usuario"
+                                                        value={formData.Nombre_Usuario || ""}
+                                                        onChange={handleFormChange}
+                                                        required
+                                                    />
+                                                </div>
+
+                                                <div className="mb-3">
+                                                    <label
+                                                        htmlFor="Credencial_Espacial"
+                                                        className="form-label"
+                                                    >
+                                                        Credencial Espacial
+                                                    </label>
+
+                                                    <input
+                                                        id="Credencial_Espacial"
+                                                        name="Credencial_Espacial"
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Credencial Espacial"
+                                                        value={formData.Credencial_Espacial || ""}
+                                                        onChange={handleFormChange}
+                                                        required
+                                                    />
+                                                </div>
+
+                                                <div className="mb-3">
+                                                    <label
+                                                        htmlFor="ID_Perfil"
+                                                        className="form-label"
+                                                    >
+                                                        ID Perfil
+                                                    </label>
+
+                                                    <input
+                                                        id="ID_Perfil"
+                                                        name="ID_Perfil"
+                                                        type="number"
+                                                        className="form-control"
+                                                        placeholder="ID Perfil"
+                                                        value={formData.ID_Perfil || ""}
+                                                        onChange={handleFormChange}
+                                                        required
+                                                    />
+                                                </div>
+
+                                                {/* Footer */}
+                                                <div className="modal-footer px-0 pb-0">
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-secondary"
+                                                        onClick={() => setIsFormOpen(false)}
+                                                    >
+                                                        Cancelar
+                                                    </button>
+
+                                                    <button
+                                                        type="submit"
+                                                        className="btn btn-primary"
+                                                    >
+                                                        {selectedUsers && selectedUsers.length > 0
+                                                            ? "Guardar"
+                                                            : "Crear"}
+                                                    </button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                         )}
+
+
+
+
+                        {/* Sidebar */}
+                        <div className="dashboard-sidebar col-lg-2 col-md-2 p-0 collapse d-md-block " id="sidebarMenu">
+                            <div className="d-flex flex-column   bg-dark h-100 " >
+
+
+                                <ul className="nav nav-pills flex-column align-items-center  ">
+                                    <li>
+                                        <button className="nav-link text-white" onClick={openCreateForm}>
+                                            Create <i className="fa-solid fa-plus"></i>
+                                        </button>
+                                    </li>
+
+                                    <li>
+                                        <button className="nav-link text-white" onClick={handleUpdateClick}>
+                                            Update <i className="fa-solid fa-pen"></i>
+                                        </button>
+                                    </li>
+
+                                    <li>
+                                        <button className="nav-link text-white" onClick={handleDeactivateClick}>
+                                            Deactivate <i className="fa-solid fa-ban"></i>
+                                        </button>
+                                    </li>
+
+                                    <li>
+                                        <button className="nav-link text-white" onClick={handleReactivateClick}>
+                                            Reactivate <i className="fa-solid fa-rotate-right"></i>
+                                        </button>
+                                    </li>
+
+                                    <li>
+                                        <button className="nav-link text-white" onClick={handleDeleteClick}>
+                                            Delete <i className="fa-solid fa-trash"></i>
+                                        </button>
+                                    </li>
+
+
+                                </ul>
+
+
+                            </div>
+                        </div>
+
+
+                        {/* Main content */}
+
+                        <div className="dashboard-table col p-0 bg-dark">
+                            <Tabs
+                                id='usuarios-main2'
+                                className='Dashboard-tabs col p-0 bg-dark'
+                                defaultActiveKey="TablaActiva"
+                            >
+                                <Tab eventKey="TablaActiva" title="Usuarios activos">
+                                    <div className="dashboard-table col p-0 bg-dark">
+                                        <div className="stats align-items-center d-flex justify-content-between p-2">
+                                            <button onClick={fetchUsuarios} disabled={loadingGetUsuarios} className="crud-btn">
+                                                {loadingGetUsuarios ? "Loading..." : "Refresh Users"}
+                                            </button>
+
+                                            <div className="stat-card">Total: {total}</div>
+                                            <div className="stat-card">Activos: {active}</div>
+                                            <div className="stat-card">Inactivos: {inactive}</div>
+                                        </div>
+
+                                        {errorGetUsuarios && <p className="error-message">{errorGetUsuarios}</p>}
+
+                                        {activeUsers.length > 0 && (
+                                            <div className="table-container">
+                                                <table className="users-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID usuario</th>
+                                                            <th>Nombre</th>
+                                                            <th>ID Perfil</th>
+                                                            <th>Credencial</th>
+                                                            <th>Estado</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody className="users-table-body">
+                                                        {visibleActiveUsers.map((usuario) => (
+                                                            <tr key={usuario.ID_Usuario}>
+                                                                {/* Select checkbox */}
+                                                                <td>
+                                                                    <input
+                                                                        className="form-check-input"
+                                                                        type="checkbox"
+                                                                        checked={selectedUsers.includes(usuario.ID_Usuario)}
+                                                                        onChange={() => {
+                                                                            setSelectedUsers((current) =>
+                                                                                current.includes(usuario.ID_Usuario)
+                                                                                    ? current.filter((id) => id !== usuario.ID_Usuario)
+                                                                                    : [...current, usuario.ID_Usuario]
+                                                                            );
+                                                                        }}
+                                                                        aria-label={`Select user ${usuario.ID_Usuario}`}
+                                                                    /> {usuario.ID_Usuario}
+                                                                </td>
+                                                                <td>{usuario.Nombre_Usuario}</td>
+                                                                <td>{usuario.ID_Perfil}</td>
+                                                                <td>{usuario.Credencial_Espacial}</td>
+                                                                <td>{usuario.Estado ? "Activo" : "Inactivo"}</td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        )}
+                                        <div className="pagination-controls">
+                                            <button
+                                                type="button"
+                                                className="crud-btn"
+                                                disabled={currentActivePage === 1}
+                                                onClick={() => setActivePage((page) => page - 1)}
+                                            >
+                                                Anterior
+                                            </button>
+                                            <span>Página {currentActivePage} de {activePageCount}</span>
+                                            <button
+                                                type="button"
+                                                className="crud-btn"
+                                                disabled={currentActivePage === activePageCount}
+                                                onClick={() => setActivePage((page) => page + 1)}
+                                            >
+                                                Siguiente
+                                            </button>
+                                        </div>
+                                    </div>
+                                </Tab>
+                                <Tab eventKey="TablaInactiva" title="Usuarios inactivos">
+                                    <div className="dashboard-table col p-0 bg-dark">
+                                        <div className="stats align-items-center d-flex justify-content-between p-2">
+                                            <button onClick={fetchUsuarios} disabled={loadingGetUsuarios} className="crud-btn">
+                                                {loadingGetUsuarios ? "Loading..." : "Refresh Users"}
+                                            </button>
+
+                                            <div className="stat-card">Total: {total}</div>
+                                            <div className="stat-card">Activos: {active}</div>
+                                            <div className="stat-card">Inactivos: {inactive}</div>
+                                        </div>
+
+                                        {errorGetUsuarios && <p className="error-message">{errorGetUsuarios}</p>}
+
+                                        {inactiveUsers.length > 0 && (
+                                            <div className="table-container">
+                                                <table className="users-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID usuario</th>
+                                                            <th>Nombre</th>
+                                                            <th>ID Perfil</th>
+                                                            <th>Credencial</th>
+                                                            <th>Estado</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody className="users-table-body">
+                                                        {visibleInactiveUsers.map((usuario) => (
+                                                            <tr key={usuario.ID_Usuario}>
+                                                                {/* Select checkbox */}
+                                                                <td>
+                                                                    <input
+                                                                        className="form-check-input"
+                                                                        type="checkbox"
+                                                                        checked={selectedUsers.includes(usuario.ID_Usuario)}
+                                                                        onChange={() => {
+                                                                            setSelectedUsers((current) =>
+                                                                                current.includes(usuario.ID_Usuario)
+                                                                                    ? current.filter((id) => id !== usuario.ID_Usuario)
+                                                                                    : [...current, usuario.ID_Usuario]
+                                                                            );
+                                                                        }}
+                                                                        aria-label={`Select user ${usuario.ID_Usuario}`}
+                                                                    /> {usuario.ID_Usuario}
+                                                                </td>
+                                                                <td>{usuario.Nombre_Usuario}</td>
+                                                                <td>{usuario.ID_Perfil}</td>
+                                                                <td>{usuario.Credencial_Espacial}</td>
+                                                                <td>{usuario.Estado ? "Activo" : "Inactivo"}</td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        )}
+                                        <div className="pagination-controls">
+                                            <button
+                                                type="button"
+                                                className="crud-btn"
+                                                disabled={currentInactivePage === 1}
+                                                onClick={() => setInactivePage((page) => page - 1)}
+                                            >
+                                                Anterior
+                                            </button>
+                                            <span>Página {currentInactivePage} de {inactivePageCount}</span>
+                                            <button
+                                                type="button"
+                                                className="crud-btn"
+                                                disabled={currentInactivePage === inactivePageCount}
+                                                onClick={() => setInactivePage((page) => page + 1)}
+                                            >
+                                                Siguiente
+                                            </button>
+                                        </div>
+                                    </div>
+                                </Tab>
+                            </Tabs>
+                        </div>
                     </div>
-                </div>
 
 
-            </div>
-        </div >
+                </div>
+            </div >
 
-        <Tabs
-            id='usuarios-main2'
-            className='mt-4 text-black p-3'
-            defaultActiveKey="TablaActiva"
-        >
-            <Tab eventKey="TablaActiva" title="Usuarios activos">
-                <div className="p-3">
-                    <h2>Usuarios activos</h2>
-                    <p>Aquí puedes agregar la tabla de usuarios activos.</p>
-                </div>
-            </Tab>
-            <Tab eventKey="TablaInactiva" title="Usuarios inactivos">
-                <div className="p-3">
-                    <h2>Usuarios inactivos</h2>
-                    <p>Aquí puedes agregar la tabla de usuarios inactivos.</p>
-                </div>
-            </Tab>
-            </Tabs>
+
+
+
         </>
     );
 }
